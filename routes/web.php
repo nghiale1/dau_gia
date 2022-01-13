@@ -13,8 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::view('/index', 'admin/template/layout');
+
+// Route::view('/admin', 'admin/template/layout');
+Route::view('/', 'client/index');

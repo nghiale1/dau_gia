@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-    @include('admin.template.header')
+    @include('admin.template.head')
     <!-- head -->
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">

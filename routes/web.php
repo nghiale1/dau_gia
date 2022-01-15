@@ -17,3 +17,5 @@ use Illuminate\Support\Facades\Route;
 
 // Route::view('/admin', 'admin/template/layout');
 Route::view('/', 'client/index');
+
+Route::view('/quan-tri','admin/template/layout');

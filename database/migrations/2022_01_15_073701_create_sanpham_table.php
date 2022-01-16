@@ -21,6 +21,8 @@ class CreateSanphamTable extends Migration
             $table->integer('sp_trangthai')->default(1);
             $table->bigInteger('ch_id')->unsigned();
             $table->foreign('ch_id')->references('ch_id')->on('cuahang')->onDelete('cascade');
+            $table->bigInteger('lsp_id')->unsigned();
+            $table->foreign('lsp_id')->references('lsp_id')->on('loaisanpham')->onDelete('cascade');
             $table->timestamps();
         });
     }

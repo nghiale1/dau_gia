@@ -34,6 +34,7 @@ class Hinhanhsanpham extends Model
 	protected $fillable = [
 		'hasp_duongdan',
 		'hasp_anhdaidien',
-		'hasp_trangthai'
+		'hasp_trangthai',
+		'sp_id'
 	];
 }

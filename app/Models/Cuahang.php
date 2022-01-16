@@ -48,7 +48,8 @@ class Cuahang extends Model
 		'ch_thongtin',
 		'ch_banner',
 		'ch_anhdaidien',
-		'ch_trangthai'
+		'ch_trangthai',
+		'nd_id'
 	];
 
 	public function baocaos()

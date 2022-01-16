@@ -18,6 +18,9 @@ class CreateHinhanhsanphamTable extends Migration
             $table->string('hasp_duongdan');
             $table->integer('hasp_anhdaidien');
             $table->integer('hasp_trangthai')->default(1);
+
+            $table->bigInteger('sp_id')->unsigned();
+            $table->foreign('sp_id')->references('sp_id')->on('sanpham')->onDelete('cascade');
             $table->timestamps();
         });
     }

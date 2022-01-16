@@ -31,3 +31,5 @@
 <script src={{asset("admin/js/adminlte.js")}}></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src={{asset("admin/js/pages/dashboard.js")}}></script>
+
+@toastr_js

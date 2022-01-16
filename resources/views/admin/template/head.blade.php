@@ -23,4 +23,5 @@
     <link rel="stylesheet" href={{asset("admin/daterangepicker/daterangepicker.css")}}>
     <!-- summernote -->
     <link rel="stylesheet" href={{asset("admin/summernote/summernote-bs4.min.css")}}>
+    @toastr_css
   </head>

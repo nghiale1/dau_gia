@@ -46,7 +46,8 @@ class Sanpham extends Model
 		'sp_soluong',
 		'sp_mota',
 		'sp_trangthai',
-		'ch_id'
+		'ch_id',
+		'lsp_id'
 	];
 
 	public function cuahang()

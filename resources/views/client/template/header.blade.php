@@ -5,7 +5,7 @@
         <div class="container">
             <div class="row">
                 <div class="menumenu__container clearfix">
-                    <div class="col-lg-2 col-md-2 col-sm-3 col-xs-5"> 
+                    <div class="col-lg-2 col-md-2 col-sm-3 col-xs-5">
                         <div class="logo">
                              <a href="index.html"><img src={{asset("client/images/logo/4.png")}} alt="logo images"></a>
                         </div>
@@ -134,7 +134,7 @@
                                     <li><a href="contact.html">contact</a></li>
                                 </ul>
                             </nav>
-                        </div>  
+                        </div>
                     </div>
                     <div class="col-md-3 col-lg-2 col-sm-4 col-xs-4">
                         <div class="header__right">
@@ -142,7 +142,7 @@
                                 <a href="#"><i class="icon-magnifier icons"></i></a>
                             </div>
                             <div class="header__account">
-                                <a href="#"><i class="icon-user icons"></i></a>
+                                <a href="{{ route('login.view') }}"><i class="icon-user icons"></i></a>
                             </div>
                             <div class="htc__shopping__cart">
                                 <a class="cart__menu" href="#"><i class="icon-handbag icons"></i></a>

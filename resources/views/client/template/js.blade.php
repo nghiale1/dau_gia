@@ -10,3 +10,5 @@
     <script src={{("client/js/waypoints.min.js")}}></script>
     <!-- Main js file that contents all jQuery plugins activation. -->
     <script src={{("client/js/main.js")}}></script>
+    @toastr_js
+    @toastr_render

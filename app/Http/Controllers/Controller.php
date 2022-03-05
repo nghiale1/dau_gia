@@ -19,4 +19,20 @@ class Controller extends BaseController
             return $store;
         }
     }
+
+    public function error($content) {
+        $alert = '<div class="alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <h5><i class="icon fas fa-ban"></i> Thông báo!</h5>'.$content.'</div>';
+        return $alert;
+    }
+
+
+    public function success($content) {
+        $alert = '<div class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <h5><i class="icon fas fa-check"></i> Thông báo!</h5>'.$content.'</div>';
+        return $alert;
+    }
+
 }

@@ -38,5 +38,10 @@ Route::group(['middleware' => 'checkUser'], function () {
 
     Route::prefix('/thuong-hieu')->name('brand.')->group(function () {
         Route::get('/', [BrandController::class, 'index'])->name('index');
+        Route::get('/them-moi', [BrandController::class, 'add'])->name('add');
+        Route::post('/xu-ly-them-moi', [BrandController::class, 'store'])->name('store');
+        Route::get('/chinh-sua/{id}', [BrandController::class, 'edit'])->name('edit');
+        Route::post('/xu-ly-chinh-sua/{id}',[BrandController::class, 'update'])->name('update');
+        Route::get('/xoa/{id}',[BrandController::class, 'delete'])->name('delete');
     });
 });

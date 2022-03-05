@@ -30,8 +30,9 @@
                   <h3 class="card-title">Danh sách thương hiệu sản phẩm</h3>
                 </div>
                 <div class="card-header">
-                    <a href="#" class="btn btn-primary">Thêm mới</a>
+                    <a href="{{ route('brand.add') }}" class="btn btn-primary">Thêm mới</a>
                 </div>
+                @include('store.template.alert')
                 <!-- /.card-header -->
                 <div class="card-body">
                   <table id="brand" class="table table-bordered table-hover">
@@ -46,8 +47,8 @@
                         <tr>
                             <td>{{ $item->th_ten }}</td>
                             <td>
-                                <a href="#" class="btn btn-warning">Chỉnh sửa</a>
-                                <a href="#" class="btn btn-danger">Xoá</a>
+                                <a href="{{ route('brand.edit', ['id'=>$item->th_id]) }}" class="btn btn-warning">Chỉnh sửa</a>
+                                <a href="{{ route('brand.delete', ['id'=>$item->th_id]) }}" class="btn btn-danger">Xoá</a>
                             </td>
                         </tr>
                         @endforeach

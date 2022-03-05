@@ -8,9 +8,11 @@ use App\Models\Nguoidung;
 use App\Models\Cuahang;
 use Hash;
 use Auth;
+use Toastr;
 class AuthController extends Controller
 {
     public function registerView() {
+        // Toastr::success('Đăng ký tài khoản thành công', 'Thông báo', ["positionClass" => "toast-top-center"]);
         return view('client.auth.register');
     }
 

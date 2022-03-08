@@ -14,6 +14,7 @@ class BrandController extends Controller
         return view('store.brand.index', compact('data'));
     }
 
+    #Bé Thư kêu để luôn
     public function add() {
         // Toastr::success('Đăng ký tài khoản thành công', 'Thông báo', ["positionClass" => "toast-top-center"]);
         toastr()->success('Tạo thương hiệu thành công');

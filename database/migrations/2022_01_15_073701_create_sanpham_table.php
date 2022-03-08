@@ -23,6 +23,8 @@ class CreateSanphamTable extends Migration
             $table->foreign('ch_id')->references('ch_id')->on('cuahang')->onDelete('cascade');
             $table->bigInteger('lsp_id')->unsigned();
             $table->foreign('lsp_id')->references('lsp_id')->on('loaisanpham')->onDelete('cascade');
+            $table->bigInteger('th_id')->unsigned();
+            $table->foreign('th_id')->references('th_id')->on('thuonghieu')->onDelete('cascade');
             $table->timestamps();
         });
     }

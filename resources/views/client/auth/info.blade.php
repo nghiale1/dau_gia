@@ -39,7 +39,7 @@
                                             <p><b>Số điện thoại:</b> {{ Auth::guard('nguoidung')->user()->nd_sdt }}</p>
                                             <p><b>Email:</b> {{ Auth::guard('nguoidung')->user()->nd_email }}</p>
                                             <p><b>Địa chỉ:</b> {{ Auth::guard('nguoidung')->user()->nd_diachi }}</p>
-                                            @if ($storeInfo->count() > 0)
+                                            @if ($storeInfo != null)
 
                                             <a href="{{ route('store.detail') }}" ><i class="zmdi zmdi-long-arrow-right"></i>Xem gian hàng</a>
                                             @else

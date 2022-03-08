@@ -1,9 +1,9 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="{{ route('store.detail') }}" class="brand-link">
         <img src={{asset("admin/img/AdminLTELogo.png")}} alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
             style="opacity: .8">
-        <span class="brand-text font-weight-light">AdminLTE 3</span>
+        <span class="brand-text font-weight-light">Audit Management</span>
     </a>
 
     <!-- Sidebar -->
@@ -34,7 +34,23 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('type.index') }}" class="nav-link
+                        @if (Request::segment(1) == 'loai-san-pham')
+                            active
+                        @endif
+                        ">
+                        <i class="nav-icon fas fa-chart-pie"></i>
+                        <p>
+                            Loại sản phẩm
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('category.index') }}" class="nav-link
+                        @if (Request::segment(1) == 'danh-muc')
+                            active
+                        @endif
+                        ">
                         <i class="nav-icon fas fa-chart-pie"></i>
                         <p>
                             Danh mục
@@ -49,14 +65,6 @@
                         </p>
                     </a>
                 </li>
-                {{-- <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-chart-pie"></i>
-                        <p>
-                            Thống kê
-                        </p>
-                    </a>
-                </li> --}}
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-chart-pie"></i>
@@ -67,7 +75,11 @@
                 </li>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('brand.index') }}" class="nav-link">
+                    <a href="{{ route('brand.index') }}" class="nav-link
+                        @if (Request::segment(1) == 'thuong-hieu')
+                            active
+                        @endif
+                    ">
                         <i class="nav-icon fas fa-chart-pie"></i>
                         <p>
                             Thương hiệu
@@ -75,14 +87,6 @@
                     </a>
                 </li>
                 </li>
-                {{-- <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-chart-pie"></i>
-                        <p>
-                            Bài viết
-                        </p>
-                    </a>
-                </li> --}}
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-chart-pie"></i>
@@ -101,7 +105,7 @@
                         <li class="nav-item">
                             <a href="pages/charts/flot.html" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Số lượng sản phẩm bán ra</p>
+                                <p>SL sản phẩm bán ra</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -118,62 +122,6 @@
                         </li>
                     </ul>
                 </li>
-                {{-- <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-chart-pie"></i>
-                        <p>
-                            Quản lý người dùng
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="pages/charts/chartjs.html" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Khách hàng</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="pages/charts/flot.html" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Cửa hàng</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="pages/charts/inline.html" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Kiểm duyệt user</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="pages/charts/uplot.html" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Kiểm duyệt cửa hàng</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="pages/charts/uplot.html" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Người dùng đăng ký</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="pages/charts/uplot.html" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Cửa hàng</p>
-                            </a>
-                        </li>
-                    </ul>
-
-                </li> --}}
-                {{-- <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-chart-pie"></i>
-                        <p>
-                            Quản lý cửa hàng
-                        </p>
-                    </a>
-                </li> --}}
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

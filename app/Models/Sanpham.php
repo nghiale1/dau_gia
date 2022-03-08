@@ -12,16 +12,18 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Sanpham
- * 
+ *
  * @property int $sp_id
  * @property string $sp_ten
  * @property int $sp_soluong
  * @property string $sp_mota
  * @property int $sp_trangthai
  * @property int $ch_id
+ * @property int $th_id
+ * @property int $lsp_id
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * 
+ *
  * @property Cuahang $cuahang
  * @property Collection|Binhluan[] $binhluans
  * @property Collection|Chitietdonhang[] $chitietdonhangs
@@ -47,7 +49,8 @@ class Sanpham extends Model
 		'sp_mota',
 		'sp_trangthai',
 		'ch_id',
-		'lsp_id'
+		'lsp_id',
+        'th_id'
 	];
 
 	public function cuahang()

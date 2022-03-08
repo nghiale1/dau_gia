@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Danhmuc
- * 
+ *
  * @property int $dm_id
  * @property string $dm_ten
  * @property string $dm_mota
@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $ch_id
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * 
+ *
  * @property Cuahang $cuahang
  * @property Collection|Sanpham[] $sanphams
  *

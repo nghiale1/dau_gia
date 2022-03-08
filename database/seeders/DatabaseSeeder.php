@@ -3,7 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-
+use Hash;
+use DB;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -12,13 +13,21 @@ class DatabaseSeeder extends Seeder
      * @return void
      */
     public function run()
-    {        
-        $this->call(NguoiDung::class);
-        $this->call(CuaHang::class);
-        $this->call(LoaiSP::class);
-        $this->call(DanhMuc::class);
-        $this->call(SanPham::class);
-        $this->call(HinhAnh::class);
-        $this->call(DanhMucSanPham::class);
+    {
+        // $this->call(NguoiDung::class);
+        $data = [
+            [
+                'username' => 'lnduc',
+                'password' => Hash::make(123),
+                'nd_hoten' => 'Le Ngoc Duc',
+                'nd_email' => 'lnd@gmail.com',
+                'nd_sdt' => '0123456789',
+                'nd_namsinh' => '24/09/1998',
+                'nd_diachi' => 'TP. HCM',
+                'nd_trangthai' => 1
+            ]
+        ];
+
+        DB::table('nguoidung')->insert($data);
     }
 }

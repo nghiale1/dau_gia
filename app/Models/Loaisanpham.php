@@ -11,14 +11,14 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Loaisanpham
- * 
+ *
  * @property int $lsp_id
  * @property string $lsp_ten
  * @property int $lsp_trangthai
  * @property int $ch_id
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * 
+ *
  * @property Cuahang $cuahang
  *
  * @package App\Models

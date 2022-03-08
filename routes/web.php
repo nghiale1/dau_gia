@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Client\AuthController;
 use App\Http\Controllers\Client\StoreController;
 use App\Http\Controllers\Store\BrandController;
+use App\Http\Controllers\Store\CategoryController;
+use App\Http\Controllers\Store\TypeController;
+use App\Http\Controllers\Store\ProductController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -43,5 +46,32 @@ Route::group(['middleware' => 'checkUser'], function () {
         Route::get('/chinh-sua/{id}', [BrandController::class, 'edit'])->name('edit');
         Route::post('/xu-ly-chinh-sua/{id}',[BrandController::class, 'update'])->name('update');
         Route::get('/xoa/{id}',[BrandController::class, 'delete'])->name('delete');
+    });
+
+    Route::prefix('/danh-muc')->name('category.')->group(function () {
+        Route::get('/', [CategoryController::class, 'index'])->name('index');
+        Route::get('/them-moi', [CategoryController::class, 'add'])->name('add');
+        Route::post('/xu-ly-them-moi', [CategoryController::class, 'store'])->name('store');
+        Route::get('/chinh-sua/{id}', [CategoryController::class, 'edit'])->name('edit');
+        Route::post('/xu-ly-chinh-sua/{id}',[CategoryController::class, 'update'])->name('update');
+        Route::get('/xoa/{id}',[CategoryController::class, 'delete'])->name('delete');
+    });
+
+    Route::prefix('/loai-san-pham')->name('type.')->group(function () {
+        Route::get('/', [TypeController::class, 'index'])->name('index');
+        Route::get('/them-moi', [TypeController::class, 'add'])->name('add');
+        Route::post('/xu-ly-them-moi', [TypeController::class, 'store'])->name('store');
+        Route::get('/chinh-sua/{id}', [TypeController::class, 'edit'])->name('edit');
+        Route::post('/xu-ly-chinh-sua/{id}',[TypeController::class, 'update'])->name('update');
+        Route::get('/xoa/{id}',[TypeController::class, 'delete'])->name('delete');
+    });
+
+    Route::prefix('/san-pham')->name('product.')->group(function () {
+        Route::get('/', [ProductController::class, 'index'])->name('index');
+        // Route::get('/them-moi', [ProductController::class, 'add'])->name('add');
+        // Route::post('/xu-ly-them-moi', [ProductController::class, 'store'])->name('store');
+        // Route::get('/chinh-sua/{id}', [ProductController::class, 'edit'])->name('edit');
+        // Route::post('/xu-ly-chinh-sua/{id}',[ProductController::class, 'update'])->name('update');
+        // Route::get('/xoa/{id}',[ProductController::class, 'delete'])->name('delete');
     });
 });

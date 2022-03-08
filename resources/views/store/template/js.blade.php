@@ -32,7 +32,7 @@
 <script src="{{asset("admin/datatables-responsive/js/responsive.bootstrap4.min.js")}}"></script>
 
 <!-- AdminLTE App -->
-{{-- <script src="{{asset("admin/js/adminlte.js")}}"></script> --}}
+<script src="{{asset("admin/js/adminlte.js")}}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 {{-- <script src="{{asset("admin/js/pages/dashboard.js")}}"></script> --}}
 @toastr_js

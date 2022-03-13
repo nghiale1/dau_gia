@@ -18,6 +18,8 @@ class CreateChitietdaugiaTable extends Migration
             $table->dateTime('ctdg_thoigian')->default(Carbon\Carbon::now());
             $table->bigInteger('dg_id')->unsigned();
             $table->foreign('dg_id')->references('dg_id')->on('daugia')->onDelete('cascade');
+            $table->bigInteger('nd_id')->unsigned();
+            $table->foreign('nd_id')->references('nd_id')->on('nguoidung')->onDelete('cascade');
             $table->timestamps();
         });
     }

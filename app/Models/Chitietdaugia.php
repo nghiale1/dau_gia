@@ -11,18 +11,18 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Chitietdaugium
- * 
+ *
  * @property int $ctdg_id
  * @property Carbon $ctdg_thoigian
  * @property int $dg_id
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * 
+ *
  * @property Daugium $daugium
  *
  * @package App\Models
  */
-class Chitietdaugium extends Model
+class Chitietdaugia extends Model
 {
 	protected $table = 'chitietdaugia';
 	protected $primaryKey = 'ctdg_id';
@@ -40,7 +40,7 @@ class Chitietdaugium extends Model
 		'dg_id'
 	];
 
-	public function daugium()
+	public function daugia()
 	{
 		return $this->belongsTo(Daugium::class, 'dg_id');
 	}

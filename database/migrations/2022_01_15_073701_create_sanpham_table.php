@@ -18,6 +18,7 @@ class CreateSanphamTable extends Migration
             $table->string('sp_ten');
             $table->integer('sp_soluong');
             $table->text('sp_mota');
+            $table->integer('sp_gia');  
             $table->integer('sp_trangthai')->default(1);
             $table->bigInteger('ch_id')->unsigned();
             $table->foreign('ch_id')->references('ch_id')->on('cuahang')->onDelete('cascade');

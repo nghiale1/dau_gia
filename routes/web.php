@@ -7,6 +7,7 @@ use App\Http\Controllers\Store\BrandController;
 use App\Http\Controllers\Store\CategoryController;
 use App\Http\Controllers\Store\TypeController;
 use App\Http\Controllers\Store\ProductController;
+use App\Http\Controllers\Client\ClientController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,7 +22,10 @@ use App\Http\Controllers\Store\ProductController;
 
 
 // Route::view('/admin', 'admin/template/layout');
-Route::view('/', 'client/index');
+Route::prefix('/')->name('client.')->group(function () {
+    Route::get('/', [ClientController::class,'index'])->name('index');
+});
+
 
 Route::view('/quan-tri','admin/template/layout');
 
@@ -68,9 +72,10 @@ Route::group(['middleware' => 'checkUser'], function () {
 
     Route::prefix('/san-pham')->name('product.')->group(function () {
         Route::get('/', [ProductController::class, 'index'])->name('index');
-        // Route::get('/them-moi', [ProductController::class, 'add'])->name('add');
-        // Route::post('/xu-ly-them-moi', [ProductController::class, 'store'])->name('store');
-        // Route::get('/chinh-sua/{id}', [ProductController::class, 'edit'])->name('edit');
+        Route::get('/them-moi', [ProductController::class, 'add'])->name('add');
+        Route::post('/xu-ly-them-moi', [ProductController::class, 'store'])->name('store');
+        Route::get('/chi-tiet/{id}', [ProductController::class, 'show'])->name('show');
+        Route::post('/them-dau-gia/{id}', [ProductController::class,'setupAudit'])->name('setup.audit');
         // Route::post('/xu-ly-chinh-sua/{id}',[ProductController::class, 'update'])->name('update');
         // Route::get('/xoa/{id}',[ProductController::class, 'delete'])->name('delete');
     });

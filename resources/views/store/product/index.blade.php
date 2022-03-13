@@ -6,12 +6,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Loại sản phẩm sản phẩm</h1>
+            <h1 class="m-0">Sản phẩm</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
-              <li class="breadcrumb-item active">Loại sản phẩm sản phẩm</li>
+              <li class="breadcrumb-item active">Sản phẩm</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -30,7 +30,7 @@
                   <h3 class="card-title">Danh sách sản phẩm</h3>
                 </div>
                 <div class="card-header">
-                    <a href="{{ route('type.add') }}" class="btn btn-primary">Thêm mới</a>
+                    <a href="{{ route('product.add') }}" class="btn btn-primary">Thêm mới</a>
                 </div>
                 @include('store.template.alert')
                 <!-- /.card-header -->
@@ -42,7 +42,6 @@
                         <th>Loại sản phẩm</th>
                         <th>Thương hiệu</th>
                         <th>Số lượng</th>
-                        <th>Mô tả</th>
                         <th>Tình trạng</th>
                         <th>Thao tác</th>
                     </tr>
@@ -51,8 +50,12 @@
                         @foreach ($data as $item)
                         <tr>
                             <td>{{ $item->sp_ten }}</td>
+                            <td>{{ $item->lsp_ten }}</td>
+                            <td>{{ $item->th_ten }}</td>
+                            <td>{{ $item->sp_soluong }}</td>
+                            <td>{{ $item->sp_soluong > 0 ? 'Còn hàng' : 'Hết hàng' }}</td>
                             <td>
-                                <a href="{{ route('type.edit', ['id'=>$item->sp_id]) }}" class="btn btn-warning">Chỉnh sửa</a>
+                                <a href="{{ route('product.show', ['id'=>$item->sp_id]) }}" class="btn btn-warning">Chi tiết</a>
                                 <a href="{{ route('type.delete', ['id'=>$item->sp_id]) }}" class="btn btn-danger">Xoá</a>
                             </td>
                         </tr>
@@ -64,7 +67,6 @@
                         <th>Loại sản phẩm</th>
                         <th>Thương hiệu</th>
                         <th>Số lượng</th>
-                        <th>Mô tả</th>
                         <th>Tình trạng</th>
                         <th>Thao tác</th>
                     </tr>

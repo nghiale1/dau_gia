@@ -15,9 +15,12 @@ class CreateDaugiaTable extends Migration
     {
         Schema::create('daugia', function (Blueprint $table) {
             $table->id('dg_id');
+            $table->dateTime('dg_thoigianbatdau');
+            $table->dateTime('dg_thoigianketthuc');
             $table->integer('dg_giakhoidiem');
             $table->integer('dg_buocnhay');
             $table->integer('dg_giamax');
+            $table->integer('dg_trangthai');
             $table->bigInteger('sp_id')->unsigned();
             $table->foreign('sp_id')->references('sp_id')->on('sanpham')->onDelete('cascade');
             $table->bigInteger('ch_id')->unsigned();

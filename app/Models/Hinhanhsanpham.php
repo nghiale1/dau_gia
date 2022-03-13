@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Hinhanhsanpham
- * 
+ *
  * @property int $hasp_id
  * @property string $hasp_duongdan
  * @property int $hasp_anhdaidien

@@ -44,6 +44,7 @@
 </div>
 <!-- ./wrapper -->
 @include('store.template.js')
+@stack('img-review')
 <!-- script -->
 </body>
 </html>

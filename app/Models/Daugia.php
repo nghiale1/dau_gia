@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Daugium
- * 
+ *
  * @property int $dg_id
  * @property int $dg_giakhoidiem
  * @property int $dg_buocnhay
@@ -21,14 +21,14 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $ch_id
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * 
+ *
  * @property Cuahang $cuahang
  * @property Sanpham $sanpham
  * @property Collection|Chitietdaugium[] $chitietdaugia
  *
  * @package App\Models
  */
-class Daugium extends Model
+class Daugia extends Model
 {
 	protected $table = 'daugia';
 	protected $primaryKey = 'dg_id';
@@ -42,6 +42,8 @@ class Daugium extends Model
 	];
 
 	protected $fillable = [
+        'dg_thoigianbatdau',
+        'dg_thoigianketthuc',
 		'dg_giakhoidiem',
 		'dg_buocnhay',
 		'dg_giamax',

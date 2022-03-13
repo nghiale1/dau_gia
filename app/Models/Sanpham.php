@@ -28,7 +28,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property Collection|Binhluan[] $binhluans
  * @property Collection|Chitietdonhang[] $chitietdonhangs
  * @property Collection|Danhmuc[] $danhmucs
- * @property Collection|Daugium[] $daugia
+ * @property Collection|Daugia[] $daugia
  *
  * @package App\Models
  */
@@ -46,6 +46,7 @@ class Sanpham extends Model
 	protected $fillable = [
 		'sp_ten',
 		'sp_soluong',
+        'sp_gia',
 		'sp_mota',
 		'sp_trangthai',
 		'ch_id',
@@ -77,6 +78,16 @@ class Sanpham extends Model
 
 	public function daugia()
 	{
-		return $this->hasMany(Daugium::class, 'sp_id');
+		return $this->hasMany(Daugia::class, 'sp_id');
+	}
+
+    public function loaisanpham()
+	{
+		return $this->belongsTo(Loaisanpham::class, 'lsp_id');
+	}
+
+    public function thuonghieu()
+	{
+		return $this->belongsTo(Thuonghieu::class, 'th_id');
 	}
 }

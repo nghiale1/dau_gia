@@ -14,8 +14,8 @@ class ClientController extends Controller
         $product = DB::table('daugia')
         ->join('sanpham','sanpham.sp_id','daugia.sp_id')
         ->join('hinhanhsanpham','hinhanhsanpham.sp_id','sanpham.sp_id')
-        ->whereDate('dg_thoigianbatdau','>=',new DateTime($timeNow))
-        ->whereDate('dg_thoigianketthuc','<=',new DateTime($timeNow))
+        ->where('daugia.dg_thoigianbatdau','<=',new DateTime($timeNow))
+        ->where('daugia.dg_thoigianketthuc','>=',new DateTime($timeNow))
         ->where('hinhanhsanpham.hasp_anhdaidien',1)
         ->get();
         return view('client.index', compact('product'));

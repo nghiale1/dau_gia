@@ -125,16 +125,15 @@ class ProductController extends Controller
         $image = DB::table('hinhanhsanpham')->where('sp_id', $id)->get();
         $timeNow = Carbon::now();
         $auditCurrent = DB::table('daugia')
-        ->whereDate('dg_thoigianbatdau','>=',new DateTime($timeNow))
-        ->whereDate('dg_thoigianketthuc','<=',new DateTime($timeNow))
+        ->where('daugia.dg_thoigianbatdau','<=',new DateTime($timeNow))
+        ->where('daugia.dg_thoigianketthuc','>=',new DateTime($timeNow))
         ->where('sp_id',$id)
         ->count();
-
         $auditInfo = DB::table('daugia')
         ->join('chitietdaugia','chitietdaugia.dg_id','daugia.dg_id')
         ->join('nguoidung','nguoidung.nd_id','chitietdaugia.nd_id')
-        ->whereDate('dg_thoigianbatdau','>=',new DateTime($timeNow))
-        ->whereDate('dg_thoigianketthuc','<=',new DateTime($timeNow))
+        ->where('daugia.dg_thoigianbatdau','<=',new DateTime($timeNow))
+        ->where('daugia.dg_thoigianketthuc','>=',new DateTime($timeNow))
         ->where('sp_id',$id)
         ->get();
 

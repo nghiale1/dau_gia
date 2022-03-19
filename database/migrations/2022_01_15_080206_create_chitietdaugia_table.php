@@ -16,6 +16,7 @@ class CreateChitietdaugiaTable extends Migration
         Schema::create('chitietdaugia', function (Blueprint $table) {
             $table->id('ctdg_id');
             $table->dateTime('ctdg_thoigian')->default(Carbon\Carbon::now());
+            $table->integer('ctdg_giatien');
             $table->bigInteger('dg_id')->unsigned();
             $table->foreign('dg_id')->references('dg_id')->on('daugia')->onDelete('cascade');
             $table->bigInteger('nd_id')->unsigned();

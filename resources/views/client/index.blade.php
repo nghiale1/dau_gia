@@ -160,7 +160,7 @@
                                 </ul>
                             </div>
                             <div class="fr__product__inner">
-                                <h4><a href="product-details.html">{{ $item->sp_ten }}</a></h4>
+                                <h4><a href="{{ route('client.product.detail', ['id'=>$item->dg_id]) }}">{{ $item->sp_ten }}</a></h4>
                                 <ul class="fr__pro__prize">
                                     <li data-countdown="{{ $item->dg_thoigianketthuc}}"></li>
                                 </ul>

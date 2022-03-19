@@ -141,6 +141,7 @@
         });
     });
 </script>
+@stack('audit-pusher')
 </body>
 
 </html>

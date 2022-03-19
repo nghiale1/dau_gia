@@ -19,11 +19,30 @@ use App\Http\Controllers\Client\ClientController;
 |
 */
 
+/* Test pusher */
+Route::get('/pusher-view', function () {
+    return view('pusher-testing.showNotification');
+});
 
+Route::get('/getPusher', function (){
+   return view('pusher-testing.form_pusher');
+})->name('event.get-pusher');
 
+Route::get('/pusher', function(Illuminate\Http\Request $request) {
+    event(new App\Events\AuditPusherEvent($request));
+    return redirect()->route('event.get-pusher');
+})->name('event.pusher');
+
+/* End test pusher */
 // Route::view('/admin', 'admin/template/layout');
 Route::prefix('/')->name('client.')->group(function () {
     Route::get('/', [ClientController::class,'index'])->name('index');
+    Route::get('/{id}/san-pham',[ClientController::class,'auditDetail'])->name('product.detail');
+    Route::get('/dau-gia', function (Illuminate\Http\Request $request) {
+        event(new App\Events\AuditPusherEvent($request));
+        return redirect()->back();
+    })->name('product.audit');
+
 });
 
 

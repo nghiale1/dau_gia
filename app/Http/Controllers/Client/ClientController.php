@@ -20,4 +20,20 @@ class ClientController extends Controller
         ->get();
         return view('client.index', compact('product'));
     }
+
+    public function auditDetail($id) {
+        $detail = DB::table('daugia')
+        ->join('sanpham','sanpham.sp_id','daugia.sp_id')
+        ->join('hinhanhsanpham','hinhanhsanpham.sp_id','sanpham.sp_id')
+        ->where('hinhanhsanpham.hasp_anhdaidien',1)
+        ->where('daugia.dg_id',$id)
+        ->first();
+
+        $audit = DB::table('chitietdaugia')->where('dg_id', $id)->orderBy('ctdg_thoigian','desc')->get();
+        $maxPrice = DB::table('chitietdaugia')
+        ->where('dg_id', $id)
+        ->orderBy('ctdg_thoigian','desc')
+        ->first();
+        return view('client.product.detail', compact('detail','audit','maxPrice'));
+    }
 }

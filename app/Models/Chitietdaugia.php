@@ -36,6 +36,7 @@ class Chitietdaugia extends Model
 	];
 
 	protected $fillable = [
+		'ctdg_giatien',
 		'ctdg_thoigian',
 		'dg_id'
 	];

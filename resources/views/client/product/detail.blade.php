@@ -60,7 +60,9 @@
                         </ul>
                         <ul  class="pro__prize">
                             <li class="old__prize">Giá cao nhất: </li>
+                            @if ($maxPrice && $maxPrice->ctdg_giatien )
                             <li id="maxPrice">{{ number_format($maxPrice->ctdg_giatien) }}</li>
+                            @endif
                         </ul>
 
 

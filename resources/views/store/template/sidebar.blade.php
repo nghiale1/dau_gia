@@ -101,7 +101,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="pages/charts/chartjs.html" class="nav-link">
+                            <a href="{{route('stat.revenue')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Doanh thu</p>
                             </a>
@@ -109,17 +109,17 @@
                         <li class="nav-item">
                             <a href="pages/charts/flot.html" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>SL sản phẩm bán ra</p>
+                                <p>Sản phẩm bán ra</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/charts/inline.html" class="nav-link">
+                            <a href="{{route('stat.product')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Sản phẩm bán được</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/charts/uplot.html" class="nav-link">
+                            <a href="{{route('stat.order')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Đơn hàng</p>
                             </a>

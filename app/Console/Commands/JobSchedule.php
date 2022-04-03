@@ -40,6 +40,7 @@ class JobSchedule extends Command
     public function handle()
     {
         $now = Carbon::now();
+        $date = $now->subDays(4);
         $daugia = DB::table('daugia')->whereDate('dg_thoigianbatdau', '<=',$now)->whereDate('dg_thoigianketthuc', '>=',$now)->where('dg_trangthai',2)->get();
         foreach ($daugia as $key => $value) {
             $chitietdaugia=DB::table('chitietdaugia')->where('dg_id',$value->dg_id)->orderBy('ctdg_giatien', 'desc')->first();
@@ -47,11 +48,15 @@ class JobSchedule extends Command
                 'gh_soluong'=>1,
                 'gh_dongia'=>$chitietdaugia->ctdg_giatien,
                 'nd_id'=>$chitietdaugia->nd_id,
+                'gh_ngaythem'=>$now
             ]);
 
             DB::table('daugia')->where('dg_id',$value->dg_id)->update([
                 'dg_trangthai'=>3
             ]);
         }
+
+        //update giỏ hàng
+        DB::table('giohang')->whereDate('gh_ngaythem','<=',$date)->delete();
     }
 }

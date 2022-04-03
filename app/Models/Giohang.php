@@ -35,7 +35,8 @@ class Giohang extends Model
 	protected $fillable = [
 		'gh_soluong',
 		'gh_dongia',
-		'nd_id'
+		'nd_id',
+		'gh_ngaythem'
 	];
 
 	public function nguoidung()

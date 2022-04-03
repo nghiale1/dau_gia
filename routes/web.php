@@ -8,6 +8,8 @@ use App\Http\Controllers\Store\CategoryController;
 use App\Http\Controllers\Store\TypeController;
 use App\Http\Controllers\Store\ProductController;
 use App\Http\Controllers\Client\ClientController;
+use App\Http\Controllers\Store\StatController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -97,5 +99,11 @@ Route::group(['middleware' => 'checkUser'], function () {
         Route::post('/them-dau-gia/{id}', [ProductController::class,'setupAudit'])->name('setup.audit');
         // Route::post('/xu-ly-chinh-sua/{id}',[ProductController::class, 'update'])->name('update');
         // Route::get('/xoa/{id}',[ProductController::class, 'delete'])->name('delete');
+    });
+
+    Route::prefix('/thong-ke')->name('stat.')->group(function () {
+        Route::get('/thong-ke-doanh-thu', [StatController::class, 'revenue'])->name('revenue');
+        Route::get('/thong-ke-don-hang', [StatController::class, 'order'])->name('order');
+        Route::get('/thong-ke-san-pham', [StatController::class, 'product'])->name('product');
     });
 });

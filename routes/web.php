@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Client\AuthController;
 use App\Http\Controllers\Client\StoreController;
@@ -8,6 +9,7 @@ use App\Http\Controllers\Store\CategoryController;
 use App\Http\Controllers\Store\TypeController;
 use App\Http\Controllers\Store\ProductController;
 use App\Http\Controllers\Client\ClientController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Store\StatController;
 
 /*
@@ -64,6 +66,14 @@ Route::group(['middleware' => 'checkUser'], function () {
         Route::get('/', [StoreController::class, 'storeDetail'])->name('store.detail');
     });
 
+    Route::prefix('/don-hang')->name('order.')->group(function () {
+        Route::get('/danh-sach-don-hang',  [OrderController::class, 'getList'])->name('getList');
+        Route::post('/cap-nhat--don-hang/{donhang}',  [OrderController::class, 'update'])->name('update');
+    });
+    
+
+    Route::get('/danh-sach-cua-hang', [AdminController::class, 'shoplist'])->name('admin.shoplist');
+
     Route::prefix('/thuong-hieu')->name('brand.')->group(function () {
         Route::get('/', [BrandController::class, 'index'])->name('index');
         Route::get('/them-moi', [BrandController::class, 'add'])->name('add');
@@ -105,5 +115,7 @@ Route::group(['middleware' => 'checkUser'], function () {
         Route::get('/thong-ke-doanh-thu', [StatController::class, 'revenue'])->name('revenue');
         Route::get('/thong-ke-don-hang', [StatController::class, 'order'])->name('order');
         Route::get('/thong-ke-san-pham', [StatController::class, 'product'])->name('product');
+        Route::get('/thong-ke-nguoi-dung', [StatController::class, 'user'])->name('user');
+        Route::get('/thong-ke-cua-hang', [StatController::class, 'store'])->name('store');
     });
 });

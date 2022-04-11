@@ -62,7 +62,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('order.getList') }}" class="nav-link">
                         <i class="nav-icon fas fa-chart-pie"></i>
                         <p>
                             Đơn hàng
@@ -107,12 +107,6 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/charts/flot.html" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Sản phẩm bán ra</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a href="{{route('stat.product')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Sản phẩm bán được</p>
@@ -122,6 +116,18 @@
                             <a href="{{route('stat.order')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Đơn hàng</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('stat.user')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Người dùng đăng ký</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('stat.store')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Top cửa hàng</p>
                             </a>
                         </li>
                     </ul>

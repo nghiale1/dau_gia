@@ -71,6 +71,9 @@ return [
         'nguoidung' => [
             'driver' => 'eloquent',
             'model' => App\Models\Nguoidung::class,
+        ],'quantrivien' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Quantrivien::class,
         ],
         // 'users' => [
         //     'driver' => 'database',

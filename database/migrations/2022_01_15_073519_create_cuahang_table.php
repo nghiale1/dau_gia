@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateCuahangTable extends Migration
@@ -23,7 +24,7 @@ class CreateCuahangTable extends Migration
             $table->integer('ch_trangthai')->default(0);
             $table->bigInteger('nd_id')->unsigned();
             $table->foreign('nd_id')->references('nd_id')->on('nguoidung')->onDelete('cascade');
-            $table->timestamps();
+            $table->timestamp('ch_ngaytao')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
     }
 

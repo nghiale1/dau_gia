@@ -19,7 +19,7 @@ class CreateDonhangTable extends Migration
             $table->date('dh_ngaytao')->default(Carbon\Carbon::now());
             $table->string('dh_diachi');
             $table->string('dh_sdt');
-            $table->integer('dh_trangthai')->default(0);
+            $table->integer('dh_trangthai')->default(0)->comment('0:dang xu ly; 1: xac nhan; 2:giao hang; 3:hoan thanh;-1:huy');
             $table->bigInteger('nd_id')->unsigned();
             $table->foreign('nd_id')->references('nd_id')->on('nguoidung')->onDelete('cascade');
             $table->bigInteger('ch_id')->unsigned();

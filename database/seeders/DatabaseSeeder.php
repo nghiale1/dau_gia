@@ -29,5 +29,11 @@ class DatabaseSeeder extends Seeder
         ];
 
         DB::table('nguoidung')->insert($data);
+
+        DB::table('quantrivien')->insert([
+            'username'=>'admin',
+            'password'=>Hash::make('admin'),
+            'qt_hoten'=>'admin',
+        ]);
     }
 }

@@ -43,6 +43,9 @@ return [
         'nguoidung' => [
             'driver' => 'session',
             'provider' => 'nguoidung',
+        ],'quantrivien' => [
+            'driver' => 'session',
+            'provider' => 'quantrivien',
         ],
     ],
 

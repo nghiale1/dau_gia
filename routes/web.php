@@ -10,6 +10,7 @@ use App\Http\Controllers\Store\TypeController;
 use App\Http\Controllers\Store\ProductController;
 use App\Http\Controllers\Client\ClientController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\Store\StatController;
 
 /*
@@ -99,6 +100,15 @@ Route::group(['middleware' => 'checkUser'], function () {
         Route::get('/chinh-sua/{id}', [TypeController::class, 'edit'])->name('edit');
         Route::post('/xu-ly-chinh-sua/{id}',[TypeController::class, 'update'])->name('update');
         Route::get('/xoa/{id}',[TypeController::class, 'delete'])->name('delete');
+    });
+
+    Route::prefix('/bai-viet')->name('post.')->group(function () {
+        Route::get('/', [PostController::class, 'index'])->name('index');
+        Route::get('/them', [PostController::class, 'create'])->name('create');
+        Route::post('/luu', [PostController::class, 'store'])->name('store');
+        Route::get('/sua/{baiviet}', [PostController::class, 'edit'])->name('edit');
+        Route::post('/cap-nhat/{baiviet}', [PostController::class, 'update'])->name('update');
+        Route::post('/xoa/{baiviet}', [PostController::class, 'delete'])->name('delete');
     });
 
     Route::prefix('/san-pham')->name('product.')->group(function () {

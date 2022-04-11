@@ -9,6 +9,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Foundation\Auth\User;
 /**
  * Class Quantrivien
  * 
@@ -21,7 +22,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App\Models
  */
-class Quantrivien extends Model
+class Quantrivien extends User
 {
 	protected $table = 'quantrivien';
 	protected $primaryKey = 'qt_id';

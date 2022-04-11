@@ -77,7 +77,6 @@
                         </p>
                     </a>
                 </li>
-                </li>
                 <li class="nav-item">
                     <a href="{{ route('brand.index') }}" class="nav-link
                         @if (Request::segment(1) == 'thuong-hieu')
@@ -90,7 +89,20 @@
                         </p>
                     </a>
                 </li>
+                @if (\Auth::guard('quantrivien')->check())
+                <li class="nav-item">
+                    <a href="{{ route('post.index') }}" class="nav-link
+                        @if (Request::segment(1) == 'bai-viet')
+                            active
+                        @endif
+                    ">
+                        <i class="nav-icon fas fa-chart-pie"></i>
+                        <p>
+                            Bài viết
+                        </p>
+                    </a>
                 </li>
+                @endif
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-chart-pie"></i>
@@ -118,6 +130,7 @@
                                 <p>Đơn hàng</p>
                             </a>
                         </li>
+                        @if (\Auth::guard('quantrivien')->check())
                         <li class="nav-item">
                             <a href="{{route('stat.user')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
@@ -130,6 +143,8 @@
                                 <p>Top cửa hàng</p>
                             </a>
                         </li>
+                        @endif
+
                     </ul>
                 </li>
             </ul>

@@ -16,7 +16,7 @@ class CheckUser
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::guard('nguoidung')->check()) {
+        if (Auth::guard('nguoidung')->check() || Auth::guard('quantrivien')->check()) {
             # code...
             return $next($request);
         }else {

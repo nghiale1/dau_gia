@@ -36,6 +36,7 @@ class Nguoidung extends User
 {
 	protected $table = 'nguoidung';
 	protected $primaryKey = 'nd_id';
+	public $timestamps = false;
 
 	protected $casts = [
 		'nd_trangthai' => 'int'

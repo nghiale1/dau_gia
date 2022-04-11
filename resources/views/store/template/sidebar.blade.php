@@ -14,7 +14,7 @@
                 <img src={{asset("admin/img/user2-160x160.jpg")}} class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">{{ Auth::guard('nguoidung')->user()->nd_hoten}}</a>
+                <a href="#" class="d-block">{{ Auth::guard('nguoidung')->user()->nd_hoten ?? 'Admin'}}</a>
             </div>
         </div>
 
@@ -25,6 +25,7 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+               @if (\Auth::guard('nguoidung')->check() || (\Auth::guard('quantrivien')->check() && \Session::has('ch_id')))
                 <li class="nav-item">
                     <a href="{{ route('product.index') }}" class="nav-link
                         @if (Request::segment(1) == 'san-pham')
@@ -89,6 +90,8 @@
                         </p>
                     </a>
                 </li>
+
+               @endif
                 @if (\Auth::guard('quantrivien')->check())
                 <li class="nav-item">
                     <a href="{{ route('post.index') }}" class="nav-link
@@ -111,7 +114,9 @@
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
+                    
                     <ul class="nav nav-treeview">
+                        @if (\Auth::guard('nguoidung')->check() || (\Auth::guard('quantrivien')->check() && \Session::has('ch_id')))
                         <li class="nav-item">
                             <a href="{{route('stat.revenue')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
@@ -130,6 +135,7 @@
                                 <p>Đơn hàng</p>
                             </a>
                         </li>
+                        @endif
                         @if (\Auth::guard('quantrivien')->check())
                         <li class="nav-item">
                             <a href="{{route('stat.user')}}" class="nav-link">
@@ -147,6 +153,35 @@
 
                     </ul>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('logout') }}" class="nav-link
+                    ">
+                        <i class="nav-icon fas fa-chart-pie"></i>
+                        <p>
+                            Đăng xuất
+                        </p>
+                    </a>
+                </li>
+                @if (\Auth::guard('quantrivien')->check())
+                <li class="nav-item">
+                    <a href="{{ route('listStore') }}" class="nav-link
+                    ">
+                        <i class="nav-icon fas fa-chart-pie"></i>
+                        <p>
+                            Danh sách cửa hàng
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('listUser') }}" class="nav-link
+                    ">
+                        <i class="nav-icon fas fa-chart-pie"></i>
+                        <p>
+                            Danh sách người dùng
+                        </p>
+                    </a>
+                </li>
+                @endif
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

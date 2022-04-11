@@ -22,6 +22,25 @@ class StoreController extends Controller
     public function storeDetail() {
         $store = $this->getStore();
         return view('store.index', compact('store'));
+    }
 
+        public function listStore()
+    {
+        $data=Cuahang::all();
+        return view('listStore',compact('data'));
+    }   
+    
+    public function updateStore(Request $request,Cuahang $cuahang)
+    {
+        $cuahang->update($request->all());
+
+        return back();
+    }
+
+    public function detailStore(Request $request,Cuahang $cuahang)
+    {
+        \Session::put('ch_id', $cuahang->ch_id);
+
+        return redirect()->route('stat.user');
     }
 }

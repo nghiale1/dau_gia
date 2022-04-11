@@ -54,7 +54,7 @@ class AuthController extends Controller
         if (Auth::guard('nguoidung')->attempt($arrLogin)) {
             return redirect()->route('user.info');
         } else if (Auth::guard('quantrivien')->attempt($arrLogin)) {
-            return redirect()->route('stat.user');
+            return redirect()->route('listStore');
         } else {
             toastr()->error('Sai tài khoản hoặc mật khẩu');
             return redirect()->back();
@@ -66,5 +66,13 @@ class AuthController extends Controller
         $userId = Auth::guard('nguoidung')->user()->nd_id;
         $storeInfo = Cuahang::where('nd_id', $userId)->first();
         return view('client.auth.info', compact('storeInfo'));
+    }
+
+    public function logout()
+    {
+        Auth::guard('nguoidung')->logout();
+        Auth::guard('quantrivien')->logout();
+
+        return redirect()->route('client.index');
     }
 }

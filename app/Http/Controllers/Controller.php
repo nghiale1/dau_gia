@@ -8,14 +8,19 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use App\Models\Cuahang;
 use Auth;
+use Illuminate\Contracts\Session\Session;
+
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
     public function getStore() {
         if (Auth::guard('nguoidung')->check()) {
-            # code...
             $id = Auth::guard('nguoidung')->user()->nd_id;
             $store = Cuahang::where('nd_id', $id)->first();
+            return $store;
+        }elseif(\Session::has('ch_id')){
+            $store = Cuahang::where('ch_id', \Session::get('ch_id'))->first();
             return $store;
         }
     }

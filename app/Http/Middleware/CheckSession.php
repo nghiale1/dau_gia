@@ -4,8 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Auth;
-class CheckUser
+
+class CheckSession
 {
     /**
      * Handle an incoming request.
@@ -16,10 +16,14 @@ class CheckUser
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::guard('nguoidung')->check() || Auth::guard('quantrivien')->check()) {
-            return $next($request);
-        }else {
-            return redirect()->route('login.view');
+        if(\Auth::guard('quantrivien')->check()){
+            if($request->session()->has('ch_id')){
+                return $next($request);
+            }else{
+                return redirect()->route('listStore');
+            }
         }
+        return $next($request);
+        
     }
 }

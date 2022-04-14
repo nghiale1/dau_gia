@@ -49,6 +49,7 @@ Route::prefix('/')->name('client.')->group(function () {
         event(new App\Events\AuditPusherEvent($request));
         return redirect()->back();
     })->name('product.audit');
+    Route::get('{id}/cua-hang',[ClientController::class,'storeInfo'])->name('product.by.store');
 });
 
 
@@ -69,7 +70,7 @@ Route::group(['middleware' => 'checkUser'], function () {
 Route::prefix('/nguoi-dung')->group(function () {
     Route::get('/danh-sach-tat-ca-nguoi-dung', [UserController::class, 'listUser'])->name('listUser');
     Route::post('/cap-nhat/{nguoidung}', [UserController::class, 'updateUser'])->name('updateUser');
-    
+
 });
 
     Route::group(['middleware' => 'checkSession'], function () {

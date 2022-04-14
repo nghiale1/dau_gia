@@ -13,135 +13,70 @@
                         <!-- Start Product Big Images -->
                         <div class="product__big__images">
                             <div class="portfolio-full-image tab-content">
-                                <div role="tabpanel" class="tab-pane fade in active" id="img-tab-1">
-                                    <img src="images/product-2/big-img/1.jpg" alt="full-image">
-                                </div>
-                                <div role="tabpanel" class="tab-pane fade" id="img-tab-2">
-                                    <img src="images/product-2/big-img/2.jpg" alt="full-image">
-                                </div>
-                                <div role="tabpanel" class="tab-pane fade" id="img-tab-3">
-                                    <img src="images/product-2/big-img/3.jpg" alt="full-image">
-                                </div>
+                                @foreach ($imageProduct as $item)
+                                    <div role="tabpanel" class="tab-pane fade in {{ $item->hasp_anhdaidien == 1 ? 'active' : '' }}" id="img-tab-{{ $item->hasp_id }}">
+                                        <img src="{{ asset($item->hasp_duongdan) }}" alt="full-image">
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                         <!-- End Product Big Images -->
                         <!-- Start Small images -->
                         <ul class="product__small__images" role="tablist">
-                            <li role="presentation" class="pot-small-img active">
-                                <a href="#img-tab-1" role="tab" data-toggle="tab">
-                                    <img src="images/product-2/sm-img-3/3.jpg" alt="small-image">
+                            @foreach ($imageProduct as $item)
+                            <li role="presentation" class="pot-small-img {{ $item->hasp_anhdaidien == 1 ? 'active' : '' }}">
+                                <a href="#img-tab-{{ $item->hasp_id }}" role="tab" data-toggle="tab">
+                                    <img src="{{ asset($item->hasp_duongdan) }}" alt="small-image">
                                 </a>
                             </li>
-                            <li role="presentation" class="pot-small-img">
-                                <a href="#img-tab-2" role="tab" data-toggle="tab">
-                                    <img src="images/product-2/sm-img-3/1.jpg" alt="small-image">
-                                </a>
-                            </li>
-                            <li role="presentation" class="pot-small-img">
-                                <a href="#img-tab-3" role="tab" data-toggle="tab">
-                                    <img src="images/product-2/sm-img-3/2.jpg" alt="small-image">
-                                </a>
-                            </li>
+                            @endforeach
                         </ul>
                         <!-- End Small images -->
                     </div>
                 </div>
                 <div class="col-md-7 col-lg-7 col-sm-12 col-xs-12 smt-40 xmt-40">
                     <div class="ht__product__dtl">
-                        <h2>jean shirt to sassy girl</h2>
-                        <h6>Model: <span>MNG001</span></h6>
+                        <h2>{{ $detail->sp_ten }}</h2>
+                        <ul  class="pro__prize">
+                            <li class="old__prize">Cửa hàng</li>
+                            <li><a href="{{ route('client.product.by.store', ['id'=>$detail->ch_id]) }}" title="Xem cửa hàng">{{ $detail->ch_ten}}</a></li>
+                        </ul>
                         <ul  class="pro__prize">
                             <li class="old__prize">Thời gian còn lại: </li>
                             <li data-countdown="{{ $detail->dg_thoigianketthuc}}"></li>
                         </ul>
                         <ul  class="pro__prize">
                             <li class="old__prize">Giá khởi điểm: </li>
-                            <li>{{ number_format($detail->dg_giakhoidiem) }}</li>
+                            <li>{{ number_format($detail->dg_giakhoidiem) }} VNĐ</li>
+                        </ul>
+                        <ul  class="pro__prize">
+                            <li class="old__prize">Bước nhảy: </li>
+                            <li>{{ number_format($detail->dg_buocnhay) }} VNĐ</li>
                         </ul>
                         <ul  class="pro__prize">
                             <li class="old__prize">Giá cao nhất: </li>
-                            @if ($maxPrice && $maxPrice->ctdg_giatien )
-                            <li id="maxPrice">{{ number_format($maxPrice->ctdg_giatien) }}</li>
-                            @endif
+                            <li id="maxPrice">{{ $maxPrice != null ? number_format($maxPrice->ctdg_giatien) : 0 }} VNĐ</li>
                         </ul>
 
-
-
-                        {{-- <p class="pro__info">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.  Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan</p> --}}
                         <div class="ht__pro__desc">
+
+                            @if ( Auth::guard('nguoidung')->check())
+                                <div class="sin__desc align--left">
+                                    <form action="{{ route('client.product.audit') }}" method="GET">
+                                        <div class="single-input">
+                                            <input type="number" name="auditPrice">
+                                            <button>Đấu giá</button>
+                                        </div>
+                                        <input type="text" name="auditId" value="{{ $detail->dg_id }}" hidden>
+                                        <input type="text" name="userId" value="{{ Auth::guard('nguoidung')->id() }}" hidden>
+                                    </form>
+                                </div>
+                            {{-- @elseif (Auth::guard('nguoidung')->id())) --}}
+                            @else
                             <div class="sin__desc">
-                                <p><span>Availability:</span> In Stock</p>
+                                <p>Vui lòng đăng nhập để tham gia đấu giá. <a href="{{ route('login.view') }}">Tại đây</a></p>
                             </div>
-                            <div class="sin__desc align--left">
-                                <form action="{{ route('client.product.audit') }}" method="GET">
-
-                                    <input type="number" name="auditPrice">
-                                    <input type="text" name="auditId" value="{{ $detail->dg_id }}">
-                                    <input type="text" name="userId" value="{{ Auth::guard('nguoidung')->id() }}">
-                                    <div class="pro__more__btn">
-                                        <button>Đấu giá</button>
-                                    </div>
-                                </form>
-                                {{-- <p><span>color:</span></p>
-                                <ul class="pro__color">
-                                    <li class="red"><a href="#">red</a></li>
-                                    <li class="green"><a href="#">green</a></li>
-                                    <li class="balck"><a href="#">balck</a></li>
-                                </ul> --}}
-
-                            </div>
-                            {{-- <div class="sin__desc align--left">
-                                <p><span>size</span></p>
-                                <select class="select__size">
-                                    <option>s</option>
-                                    <option>l</option>
-                                    <option>xs</option>
-                                    <option>xl</option>
-                                    <option>m</option>
-                                    <option>s</option>
-                                </select>
-                            </div>
-                            <div class="sin__desc align--left">
-                                <p><span>Categories:</span></p>
-                                <ul class="pro__cat__list">
-                                    <li><a href="#">Fashion,</a></li>
-                                    <li><a href="#">Accessories,</a></li>
-                                    <li><a href="#">Women,</a></li>
-                                    <li><a href="#">Men,</a></li>
-                                    <li><a href="#">Kid,</a></li>
-                                    <li><a href="#">Mobile,</a></li>
-                                    <li><a href="#">Computer,</a></li>
-                                    <li><a href="#">Hair,</a></li>
-                                    <li><a href="#">Clothing,</a></li>
-                                </ul>
-                            </div>
-                            <div class="sin__desc align--left">
-                                <p><span>Product tags:</span></p>
-                                <ul class="pro__cat__list">
-                                    <li><a href="#">Fashion,</a></li>
-                                    <li><a href="#">Accessories,</a></li>
-                                    <li><a href="#">Women,</a></li>
-                                    <li><a href="#">Men,</a></li>
-                                    <li><a href="#">Kid,</a></li>
-                                </ul>
-                            </div>
-
-                            <div class="sin__desc product__share__link">
-                                <p><span>Share this:</span></p>
-                                <ul class="pro__share">
-                                    <li><a href="#" target="_blank"><i class="icon-social-twitter icons"></i></a></li>
-
-                                    <li><a href="#" target="_blank"><i class="icon-social-instagram icons"></i></a></li>
-
-                                    <li><a href="https://www.facebook.com/Furny/?ref=bookmarks" target="_blank"><i class="icon-social-facebook icons"></i></a></li>
-
-                                    <li><a href="#" target="_blank"><i class="icon-social-google icons"></i></a></li>
-
-                                    <li><a href="#" target="_blank"><i class="icon-social-linkedin icons"></i></a></li>
-
-                                    <li><a href="#" target="_blank"><i class="icon-social-pinterest icons"></i></a></li>
-                                </ul>
-                            </div> --}}
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -158,9 +93,9 @@
             <div class="col-xs-12">
                 <!-- Start List And Grid View -->
                 <ul class="pro__details__tab" role="tablist">
-                    <li role="presentation" class="description active"><a href="#description" role="tab" data-toggle="tab">description</a></li>
-                    <li role="presentation" class="review"><a href="#review" role="tab" data-toggle="tab">review</a></li>
-                    <li role="presentation" class="shipping"><a href="#shipping" role="tab" data-toggle="tab">shipping</a></li>
+                    <li role="presentation" class="description active"><a href="#description" role="tab" data-toggle="tab">Thông tin đấu giá</a></li>
+                    <li role="presentation" class="review"><a href="#review" role="tab" data-toggle="tab">Thông tin sản phẩm</a></li>
+                    {{-- <li role="presentation" class="shipping"><a href="#shipping" role="tab" data-toggle="tab">shipping</a></li> --}}
                 </ul>
                 <!-- End List And Grid View -->
             </div>
@@ -193,12 +128,7 @@
                     <!-- Start Single Content -->
                     <div role="tabpanel" id="review" class="pro__single__content tab-pane fade">
                         <div class="pro__tab__content__inner">
-                            <p>Formfitting clothing is all about a sweet spot. That elusive place where an item is tight but not clingy, sexy but not cloying, cool but not over the top. Alexandra Alvarez’s label, Alix, hits that mark with its range of comfortable, minimal, and neutral-hued bodysuits.</p>
-                            <h4 class="ht__pro__title">Description</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem</p>
-                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
-                            <h4 class="ht__pro__title">Standard Featured</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem</p>
+                            <p>{{ $detail->sp_mota }}</p>
                         </div>
                     </div>
                     <!-- End Single Content -->

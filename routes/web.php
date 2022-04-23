@@ -71,7 +71,14 @@ Route::prefix('/nguoi-dung')->group(function () {
     Route::post('/cap-nhat/{nguoidung}', [UserController::class, 'updateUser'])->name('updateUser');
     
 });
-
+Route::prefix('/bai-viet')->name('post.')->group(function () {
+    Route::get('/', [PostController::class, 'index'])->name('index');
+    Route::get('/them', [PostController::class, 'create'])->name('create');
+    Route::post('/luu', [PostController::class, 'store'])->name('store');
+    Route::get('/sua/{baiviet}', [PostController::class, 'edit'])->name('edit');
+    Route::post('/cap-nhat/{baiviet}', [PostController::class, 'update'])->name('update');
+    Route::post('/xoa/{baiviet}', [PostController::class, 'delete'])->name('delete');
+});
     Route::group(['middleware' => 'checkSession'], function () {
 
         Route::get('/thong-tin-ca-nhan', [AuthController::class, 'info'])->name('user.info');
@@ -79,6 +86,8 @@ Route::prefix('/nguoi-dung')->group(function () {
 
         Route::prefix('/cua-hang')->group(function () {
             Route::get('/', [StoreController::class, 'storeDetail'])->name('store.detail');
+            Route::get('/thong-tin', [StoreController::class, 'info'])->name('store.info');
+            Route::post('/cap-nhat/{cuahang}', [StoreController::class, 'update'])->name('store.update');
         });
 
         Route::prefix('/don-hang')->name('order.')->group(function () {
@@ -115,15 +124,7 @@ Route::prefix('/nguoi-dung')->group(function () {
             Route::post('/xu-ly-chinh-sua/{id}', [TypeController::class, 'update'])->name('update');
             Route::get('/xoa/{id}', [TypeController::class, 'delete'])->name('delete');
         });
-
-        Route::prefix('/bai-viet')->name('post.')->group(function () {
-            Route::get('/', [PostController::class, 'index'])->name('index');
-            Route::get('/them', [PostController::class, 'create'])->name('create');
-            Route::post('/luu', [PostController::class, 'store'])->name('store');
-            Route::get('/sua/{baiviet}', [PostController::class, 'edit'])->name('edit');
-            Route::post('/cap-nhat/{baiviet}', [PostController::class, 'update'])->name('update');
-            Route::post('/xoa/{baiviet}', [PostController::class, 'delete'])->name('delete');
-        });
+        
 
         Route::prefix('/san-pham')->name('product.')->group(function () {
             Route::get('/', [ProductController::class, 'index'])->name('index');

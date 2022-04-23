@@ -92,11 +92,8 @@
                                         <li><a href="product-details.html">Product Details</a></li>
                                     </ul>
                                 </li>
-                                <li class="drop"><a href="blog.html">blog</a>
-                                    <ul class="dropdown">
-                                        <li><a href="blog.html">Blog Grid</a></li>
-                                        <li><a href="blog-details.html">Blog Details</a></li>
-                                    </ul>
+                                <li class="drop">
+                                    <a href="{{route("post.list")}}">Blog</a>
                                 </li>
                                 <li class="drop"><a href="#">Pages</a>
                                     <ul class="dropdown">

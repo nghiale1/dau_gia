@@ -51,6 +51,12 @@ Route::prefix('/')->name('client.')->group(function () {
     })->name('product.audit');
 });
 
+Route::prefix('/bai-viet')->name("post.")->group(function () {
+    Route::get('/danh-sach', [PostController::class, 'list'])->name('list');
+    Route::get('/chi-tiet/{baiviet}', [PostController::class, 'detail'])->name('detail');
+    
+});
+
 
 Route::view('/quan-tri', 'admin/template/layout');
 

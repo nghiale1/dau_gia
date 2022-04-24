@@ -40,8 +40,11 @@
                                             <p><b>Email:</b> {{ Auth::guard('nguoidung')->user()->nd_email }}</p>
                                             <p><b>Địa chỉ:</b> {{ Auth::guard('nguoidung')->user()->nd_diachi }}</p>
                                             @if ($storeInfo != null)
-
-                                            <a href="{{ route('store.detail') }}" ><i class="zmdi zmdi-long-arrow-right"></i>Xem gian hàng</a>
+                                                @if ($storeInfo->ch_trangthai == 0)
+                                                    <p style="color: red;">Gian hàng chưa được xác thực</p>
+                                                @else
+                                                    <a href="{{ route('store.detail') }}" ><i class="zmdi zmdi-long-arrow-right" ></i>Xem gian hàng</a>
+                                                @endif
                                             @else
                                             <a href="#" class="ship-to-another-trigger"><i class="zmdi zmdi-long-arrow-right"></i>Đăng ký gian hàng</a>
                                             @endif

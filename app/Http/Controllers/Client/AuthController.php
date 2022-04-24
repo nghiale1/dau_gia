@@ -9,7 +9,9 @@ use App\Models\Cuahang;
 use Hash;
 use Auth;
 use Toastr;
-
+use Illuminate\Support\Facades\Mail;
+use App\Mail\AuthNotify;
+use DB;
 class AuthController extends Controller
 {
     public function registerView()
@@ -34,7 +36,12 @@ class AuthController extends Controller
             toastr()->error('Mật khẩu không trùng khớp');
             return redirect()->back();
         }
-        $userInsert = Nguoidung::insert($data);
+        $userInsert = Nguoidung::insertGetId($data);
+
+        //send mail for authenticate
+        $toMail = $request->nd_email;
+        $link = url('/').'/xac-thuc/'.$userInsert;
+        Mail::to($toMail)->send(new AuthNotify($request->nd_hoten,$link));
 
         return redirect()->route('login.view');
     }
@@ -45,12 +52,24 @@ class AuthController extends Controller
         return view('client.auth.login');
     }
 
+    public function authVerify($id) {
+        DB::table('nguoidung')->where('nd_id',$id)->update(['nd_trangthai'=> 1]);
+        toastr()->success('Tài khoản đã được kích hoạt');
+        return redirect()->route('login.view');
+    }
+
     public function loginHandle(Request $request)
     {
         $arrLogin = [
             'username' => $request->username,
             'password' => $request->password
         ];
+        $check = Nguoidung::where('username',$request->username)->where('nd_trangthai',0)->first();
+        if($check != null) {
+            toastr()->error('Tài khoản chưa được kích hoạt');
+            return redirect()->back();
+        }
+
         if (Auth::guard('nguoidung')->attempt($arrLogin)) {
             return redirect()->route('user.info');
         } else if (Auth::guard('quantrivien')->attempt($arrLogin)) {

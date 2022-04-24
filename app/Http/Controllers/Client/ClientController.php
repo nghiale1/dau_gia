@@ -30,6 +30,19 @@ class ClientController extends Controller
         ->where('daugia.dg_id',$id)
         ->first();
 
+        // dd($detail);
+        if($detail == null || $detail == "") {
+            $detail = DB::table('sanpham')
+            ->join('hinhanhsanpham','hinhanhsanpham.sp_id','sanpham.sp_id')
+            ->join('cuahang','cuahang.ch_id','sanpham.ch_id')
+            ->where('hinhanhsanpham.hasp_anhdaidien',1)
+            ->where('sanpham.sp_id',$id)
+            ->first();
+        }
+
+        // dd($detail);
+        // dd();
+
         $imageProduct = DB::table('hinhanhsanpham')->where('sp_id',$detail->sp_id)->get();
 
         $audit = DB::table('chitietdaugia')->where('dg_id', $id)->orderBy('ctdg_thoigian','desc')->get();
@@ -42,6 +55,10 @@ class ClientController extends Controller
 
 
     public function storeInfo($id) {
-        return view('client.product.store');
+        $storeInfo = DB::table('cuahang')->where('ch_id', $id)->first();
+        $product = DB::table('sanpham')->where('ch_id', $id)->get();
+        $category = DB::table('danhmuc')->where('ch_id',$id)->get();
+        $productType = DB::table('loaisanpham')->where('ch_id',$id)->get();
+        return view('client.product.store', compact('product','storeInfo','category','productType'));
     }
 }

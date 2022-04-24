@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use Hash;
 use DB;
 class DatabaseSeeder extends Seeder
+
 {
     /**
      * Seed the application's database.

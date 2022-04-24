@@ -39,11 +39,4 @@ class Controller extends BaseController
         <h5><i class="icon fas fa-check"></i> Thông báo!</h5>'.$content.'</div>';
         return $alert;
     }
-
-
-    // public function audit($id) {
-    //     return
-    // }
-
-
 }

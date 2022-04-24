@@ -57,7 +57,7 @@ Route::view('/quan-tri', 'admin/template/layout');
 
 Route::get('/dang-ky', [AuthController::class, 'registerView'])->name('register.view');
 Route::post('/xu-ly-dang-ky', [AuthController::class, 'registerHandle'])->name('register.handle');
-
+Route::get('/xac-thuc/{id}',[AuthController::class,'authVerify'])->name('register.auth.verify');
 Route::get('/dang-nhap', [AuthController::class, 'loginView'])->name('login.view');
 Route::get('/dang-xuat', [AuthController::class, 'logout'])->name('logout');
 Route::get('/xu-ly-dang-nhap', [AuthController::class, 'loginHandle'])->name('login.handle');
@@ -67,11 +67,11 @@ Route::group(['middleware' => 'checkUser'], function () {
     Route::get('/chi-tiet/{cuahang}', [StoreController::class, 'detailStore'])->name('admin.detailStore');
     Route::post('/cap-nhat/{cuahang}', [StoreController::class, 'updateStore'])->name('admin.updateStore');
 
-Route::prefix('/nguoi-dung')->group(function () {
-    Route::get('/danh-sach-tat-ca-nguoi-dung', [UserController::class, 'listUser'])->name('listUser');
-    Route::post('/cap-nhat/{nguoidung}', [UserController::class, 'updateUser'])->name('updateUser');
+    Route::prefix('/nguoi-dung')->group(function () {
+        Route::get('/danh-sach-tat-ca-nguoi-dung', [UserController::class, 'listUser'])->name('listUser');
+        Route::post('/cap-nhat/{nguoidung}', [UserController::class, 'updateUser'])->name('updateUser');
 
-});
+    });
 
     Route::group(['middleware' => 'checkSession'], function () {
 

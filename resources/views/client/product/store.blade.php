@@ -9,11 +9,12 @@
                     <div class="col-xs-12">
                         <div class="bradcaump__inner">
                             <nav class="bradcaump-inner">
-                                <a class="breadcrumb-item" href="index.html">Home</a>
+                                <a class="breadcrumb-item" href="index.html">Trang chủ</a>
                                 <span class="brd-separetor"><i class="zmdi zmdi-chevron-right"></i></span>
-                                <a class="breadcrumb-item" href="product-grid.html">Products</a>
+                                <a class="breadcrumb-item" href="product-grid.html">Cửa hàng</a>
                                 <span class="brd-separetor"><i class="zmdi zmdi-chevron-right"></i></span>
-                                <span class="breadcrumb-item active">ean shirt</span>
+                                {{-- vn_str_filter("Xin chào tôi tên là Đức") --}}
+                                <span class="breadcrumb-item active">{{ $storeInfo->ch_ten }}</span>
                             </nav>
                         </div>
                     </div>
@@ -34,127 +35,20 @@
                             <div class="product__big__images">
                                 <div class="portfolio-full-image tab-content">
                                     <div role="tabpanel" class="tab-pane fade in active" id="img-tab-1">
-                                        <img src="images/product-2/big-img/1.jpg" alt="full-image">
-                                    </div>
-                                    <div role="tabpanel" class="tab-pane fade" id="img-tab-2">
-                                        <img src="images/product-2/big-img/2.jpg" alt="full-image">
-                                    </div>
-                                    <div role="tabpanel" class="tab-pane fade" id="img-tab-3">
-                                        <img src="images/product-2/big-img/3.jpg" alt="full-image">
+                                        <img src="{{ asset('client/images/product-2/big-img/1.jpg') }}" alt="full-image">
                                     </div>
                                 </div>
                             </div>
                             <!-- End Product Big Images -->
-                            <!-- Start Small images -->
-                            <ul class="product__small__images" role="tablist">
-                                <li role="presentation" class="pot-small-img active">
-                                    <a href="#img-tab-1" role="tab" data-toggle="tab">
-                                        <img src="images/product-2/sm-img-3/3.jpg" alt="small-image">
-                                    </a>
-                                </li>
-                                <li role="presentation" class="pot-small-img">
-                                    <a href="#img-tab-2" role="tab" data-toggle="tab">
-                                        <img src="images/product-2/sm-img-3/1.jpg" alt="small-image">
-                                    </a>
-                                </li>
-                                <li role="presentation" class="pot-small-img">
-                                    <a href="#img-tab-3" role="tab" data-toggle="tab">
-                                        <img src="images/product-2/sm-img-3/2.jpg" alt="small-image">
-                                    </a>
-                                </li>
-                            </ul>
-                            <!-- End Small images -->
                         </div>
                     </div>
                     <div class="col-md-7 col-lg-7 col-sm-12 col-xs-12 smt-40 xmt-40">
                         <div class="ht__product__dtl">
-                            <h2>jean shirt to sassy girl</h2>
-                            <h6>Model: <span>MNG001</span></h6>
-                            <ul class="rating">
-                                <li><i class="icon-star icons"></i></li>
-                                <li><i class="icon-star icons"></i></li>
-                                <li><i class="icon-star icons"></i></li>
-                                <li class="old"><i class="icon-star icons"></i></li>
-                                <li class="old"><i class="icon-star icons"></i></li>
-                            </ul>
-                            <ul class="pro__prize">
-                                <li class="old__prize">$82.5</li>
-                                <li>$75.2</li>
-                            </ul>
-                            <p class="pro__info">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-                                nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim
-                                ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex
-                                ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
-                                molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan</p>
-                            <div class="ht__pro__desc">
-                                <div class="sin__desc">
-                                    <p><span>Availability:</span> In Stock</p>
-                                </div>
-                                <div class="sin__desc align--left">
-                                    <p><span>color:</span></p>
-                                    <ul class="pro__color">
-                                        <li class="red"><a href="#">red</a></li>
-                                        <li class="green"><a href="#">green</a></li>
-                                        <li class="balck"><a href="#">balck</a></li>
-                                    </ul>
-                                    <div class="pro__more__btn">
-                                        <a href="#">more</a>
-                                    </div>
-                                </div>
-                                <div class="sin__desc align--left">
-                                    <p><span>size</span></p>
-                                    <select class="select__size">
-                                        <option>s</option>
-                                        <option>l</option>
-                                        <option>xs</option>
-                                        <option>xl</option>
-                                        <option>m</option>
-                                        <option>s</option>
-                                    </select>
-                                </div>
-                                <div class="sin__desc align--left">
-                                    <p><span>Categories:</span></p>
-                                    <ul class="pro__cat__list">
-                                        <li><a href="#">Fashion,</a></li>
-                                        <li><a href="#">Accessories,</a></li>
-                                        <li><a href="#">Women,</a></li>
-                                        <li><a href="#">Men,</a></li>
-                                        <li><a href="#">Kid,</a></li>
-                                        <li><a href="#">Mobile,</a></li>
-                                        <li><a href="#">Computer,</a></li>
-                                        <li><a href="#">Hair,</a></li>
-                                        <li><a href="#">Clothing,</a></li>
-                                    </ul>
-                                </div>
-                                <div class="sin__desc align--left">
-                                    <p><span>Product tags:</span></p>
-                                    <ul class="pro__cat__list">
-                                        <li><a href="#">Fashion,</a></li>
-                                        <li><a href="#">Accessories,</a></li>
-                                        <li><a href="#">Women,</a></li>
-                                        <li><a href="#">Men,</a></li>
-                                        <li><a href="#">Kid,</a></li>
-                                    </ul>
-                                </div>
-
-                                <div class="sin__desc product__share__link">
-                                    <p><span>Share this:</span></p>
-                                    <ul class="pro__share">
-                                        <li><a href="#" target="_blank"><i class="icon-social-twitter icons"></i></a></li>
-
-                                        <li><a href="#" target="_blank"><i class="icon-social-instagram icons"></i></a></li>
-
-                                        <li><a href="https://www.facebook.com/Furny/?ref=bookmarks" target="_blank"><i
-                                                    class="icon-social-facebook icons"></i></a></li>
-
-                                        <li><a href="#" target="_blank"><i class="icon-social-google icons"></i></a></li>
-
-                                        <li><a href="#" target="_blank"><i class="icon-social-linkedin icons"></i></a></li>
-
-                                        <li><a href="#" target="_blank"><i class="icon-social-pinterest icons"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
+                            <h2>{{ $storeInfo->ch_ten }}</h2>
+                            <h6>Sản phẩm: {{ count($product) }}</span></h6>
+                            <h6>Tỉ bán hàng bán được: {{ count($product) }}</span></h6>
+                            <h6>Thông tin cửa hàng</span></h6>
+                            <p class="pro__info">{{ $storeInfo->ch_thongtin }}</p>
                         </div>
                     </div>
                 </div>
@@ -170,12 +64,12 @@
                 <div class="col-xs-12">
                     <!-- Start List And Grid View -->
                     <ul class="pro__details__tab" role="tablist">
-                        <li role="presentation" class="description active"><a href="#description" role="tab"
-                                data-toggle="tab">description</a></li>
-                        <li role="presentation" class="review"><a href="#review" role="tab"
-                                data-toggle="tab">review</a></li>
-                        <li role="presentation" class="shipping"><a href="#shipping" role="tab"
-                                data-toggle="tab">shipping</a></li>
+                        <li role="presentation" class="all active"><a href="#all" role="tab"
+                                data-toggle="tab">Tất cả sản phẩm</a></li>
+                        @foreach ($category as $item)
+                            <li role="presentation" class="{{ $item->dm_id }}"><a href="#{{ $item->dm_id }}" role="tab"
+                                data-toggle="tab">{{ $item->dm_ten }}</a></li>
+                        @endforeach
                     </ul>
                     <!-- End List And Grid View -->
                 </div>
@@ -184,7 +78,7 @@
                 <div class="col-xs-12">
                     <div class="ht__pro__details__content">
                         <!-- Start Single Content -->
-                        <div role="tabpanel" id="description" class="pro__single__content tab-pane fade in active">
+                        <div role="tabpanel" id="all" class="pro__single__content tab-pane fade in active">
                             <div class="pro__tab__content__inner">
                                 <p>Formfitting clothing is all about a sweet spot. That elusive place where an item is tight
                                     but not clingy, sexy but not cloying, cool but not over the top. Alexandra Alvarez’s
@@ -218,76 +112,73 @@
                             </div>
                         </div>
                         <!-- End Single Content -->
-                        <!-- Start Single Content -->
-                        <div role="tabpanel" id="review" class="pro__single__content tab-pane fade">
+                        @foreach ($category as $item)
+                        <div role="tabpanel" id="{{ $item->dm_id }}" class="pro__single__content tab-pane fade">
                             <div class="pro__tab__content__inner">
-                                <p>Formfitting clothing is all about a sweet spot. That elusive place where an item is tight
-                                    but not clingy, sexy but not cloying, cool but not over the top. Alexandra Alvarez’s
-                                    label, Alix, hits that mark with its range of comfortable, minimal, and neutral-hued
-                                    bodysuits.</p>
-                                <h4 class="ht__pro__title">Description</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
-                                    tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam,
-                                    quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo
-                                    consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie
-                                    consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto
-                                    odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait
-                                    nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet
-                                    doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam;
-                                    est usus legentis in iis qui facit eorum claritatem</p>
-                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
-                                    tincidunt ut laoreet dolore magna aliquam erat volutpat. Duis autem vel eum iriure dolor
-                                    in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat
-                                    nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent
-                                    luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
-                                <h4 class="ht__pro__title">Standard Featured</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
-                                    tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam,
-                                    quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo
-                                    consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie
-                                    consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto
-                                    odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait
-                                    nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet
-                                    doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam;
-                                    est usus legentis in iis qui facit eorum claritatem</p>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                            <div class="htc__product__leftsidebar">
+                                                <div class="htc__category">
+                                                    <h4 class="title__line--4">Loại sản phẩm</h4>
+                                                    <ul class="ht__cat__list" role="tablist">
+                                                        <!-- TODO: chia theo product type, set lại cái href theo id của product type-->
+                                                        @foreach ($productType as $item => $value)
+                                                            <li role="presentation" class="grid-view {{ $item == 0 ? "active" : "" }}"><a href="#{{ vn_str_filter($value->lsp_ten) }}" role="tab" data-toggle="tab">{{ $value->lsp_ten }}</a></li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                            <div class="htc__product__rightidebar">
+                                                <div class="htc__grid__top">
+                                                    {{-- <div class="ht__pro__qun">
+                                                        <span>Showing 1-12 of 1033 products</span>
+                                                    </div> --}}
+                                                    {{--<ul class="view__mode" role="tablist">
+                                                        <li role="presentation" class="grid-view active"><a href="#grid-view" role="tab" data-toggle="tab"><i class="zmdi zmdi-grid"></i></a></li>
+                                                        <li role="presentation" class="list-view"><a href="#list-view" role="tab" data-toggle="tab"><i class="zmdi zmdi-view-list"></i></a></li>
+                                                    </ul> --}}
+                                                </div>
+                                                <div class="row">
+                                                    <div class="shop__grid__view__wrap">
+                                                        @foreach ($productType as $item => $value)
+                                                            <div role="tabpanel" id="{{ vn_str_filter($value->lsp_ten) }}" class="single-grid-view tab-pane fade {{ $item == 0 ? "in active" : "" }} clearfix">
+                                                               @php $productByType = DB::table('sanpham')->join('hinhanhsanpham','hinhanhsanpham.sp_id','sanpham.sp_id')->where('hasp_anhdaidien',1)->where('lsp_id', $value->lsp_id)->get(); @endphp
+                                                               @foreach ($productByType as $item)
+                                                                    <!-- Start Single Product -->
+                                                                    <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                                                                        <div class="category">
+                                                                            <div class="ht__cat__thumb">
+                                                                                <a href="{{ route('client.product.detail', ['id'=>$item->sp_id]) }}">
+                                                                                    <img src="{{ asset($item->hasp_duongdan) }}" alt="product images">
+                                                                                </a>
+                                                                            </div>
+                                                                            <div class="fr__product__inner">
+                                                                                <h4><a href="{{ route('client.product.detail', ['id'=>$item->sp_id]) }}">{{ $item->sp_ten }}</a></h4>
+                                                                                <ul class="fr__pro__prize">
+                                                                                    <li class="old__prize">{{ number_format($item->sp_gia) }}</li>
+                                                                                    {{-- <li>$25.9</li> --}}
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- End Single Product -->
+                                                               @endforeach
+                                                            </div>
+                                                        @endforeach
+                                                    </div>
+                                                </div>
+                                                <!-- End Product View -->
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <!-- End Single Content -->
-                        <!-- Start Single Content -->
-                        <div role="tabpanel" id="shipping" class="pro__single__content tab-pane fade">
-                            <div class="pro__tab__content__inner">
-                                <p>Formfitting clothing is all about a sweet spot. That elusive place where an item is tight
-                                    but not clingy, sexy but not cloying, cool but not over the top. Alexandra Alvarez’s
-                                    label, Alix, hits that mark with its range of comfortable, minimal, and neutral-hued
-                                    bodysuits.</p>
-                                <h4 class="ht__pro__title">Description</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
-                                    tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam,
-                                    quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo
-                                    consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie
-                                    consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto
-                                    odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait
-                                    nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet
-                                    doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam;
-                                    est usus legentis in iis qui facit eorum claritatem</p>
-                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
-                                    tincidunt ut laoreet dolore magna aliquam erat volutpat. Duis autem vel eum iriure dolor
-                                    in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat
-                                    nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent
-                                    luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
-                                <h4 class="ht__pro__title">Standard Featured</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
-                                    tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam,
-                                    quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo
-                                    consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie
-                                    consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto
-                                    odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait
-                                    nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet
-                                    doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam;
-                                    est usus legentis in iis qui facit eorum claritatem</p>
-                            </div>
-                        </div>
-                        <!-- End Single Content -->
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -295,7 +186,7 @@
     </section>
     <!-- End Product Description -->
     <!-- Start Product Area -->
-    <section class="htc__product__area--2 pb--100 product-details-res">
+    {{-- <section class="htc__product__area--2 pb--100 product-details-res">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12">
@@ -440,7 +331,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- End Banner Area -->
     <!-- End Banner Area -->
 @endsection

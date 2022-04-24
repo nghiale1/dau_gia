@@ -24,6 +24,6 @@ class CheckSession
             }
         }
         return $next($request);
-        
+
     }
 }

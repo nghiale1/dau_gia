@@ -133,13 +133,6 @@
                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                             <div class="htc__product__rightidebar">
                                                 <div class="htc__grid__top">
-                                                    {{-- <div class="ht__pro__qun">
-                                                        <span>Showing 1-12 of 1033 products</span>
-                                                    </div> --}}
-                                                    {{--<ul class="view__mode" role="tablist">
-                                                        <li role="presentation" class="grid-view active"><a href="#grid-view" role="tab" data-toggle="tab"><i class="zmdi zmdi-grid"></i></a></li>
-                                                        <li role="presentation" class="list-view"><a href="#list-view" role="tab" data-toggle="tab"><i class="zmdi zmdi-view-list"></i></a></li>
-                                                    </ul> --}}
                                                 </div>
                                                 <div class="row">
                                                     <div class="shop__grid__view__wrap">

@@ -18,6 +18,8 @@ class CreateGiohangTable extends Migration
             $table->string('gh_soluong');
             $table->string('gh_dongia');
             $table->dateTime('gh_ngaythem');
+            $table->bigInteger('sp_id')->unsigned();
+            $table->foreign('sp_id')->references('sp_id')->on('sanpham')->onDelete('cascade');
             $table->bigInteger('nd_id')->unsigned();
             $table->foreign('nd_id')->references('nd_id')->on('nguoidung')->onDelete('cascade');
             $table->timestamps();

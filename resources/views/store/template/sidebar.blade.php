@@ -71,7 +71,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('store.info') }}" class="nav-link">
                         <i class="nav-icon fas fa-chart-pie"></i>
                         <p>
                             Thông tin cửa hàng
@@ -153,15 +153,6 @@
 
                     </ul>
                 </li>
-                <li class="nav-item">
-                    <a href="{{ route('logout') }}" class="nav-link
-                    ">
-                        <i class="nav-icon fas fa-chart-pie"></i>
-                        <p>
-                            Đăng xuất
-                        </p>
-                    </a>
-                </li>
                 @if (\Auth::guard('quantrivien')->check())
                 <li class="nav-item">
                     <a href="{{ route('listStore') }}" class="nav-link
@@ -182,6 +173,16 @@
                     </a>
                 </li>
                 @endif
+                <li class="nav-item">
+                    <a href="{{ route('logout') }}" class="nav-link
+                    ">
+                        <i class="nav-icon fas fa-chart-pie"></i>
+                        <p>
+                            Đăng xuất
+                        </p>
+                    </a>
+                </li>
+                
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

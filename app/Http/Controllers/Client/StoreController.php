@@ -43,4 +43,32 @@ class StoreController extends Controller
 
         return redirect()->route('stat.user');
     }
+
+    public function info(Request $request)
+    {
+        $store = $this->getStore();
+        return view('store.info', compact('store'));
+    }
+
+    public function update(Request $request,Cuahang $cuahang)
+    {
+        
+
+        $nameFileAvatar = $request->ch_anhdaidien->getClientOriginalName('ch_anhdaidien');
+        $request->ch_anhdaidien->move($cuahang->ch_id,$nameFileAvatar);
+
+            $nameFileBanner = $request->ch_banner->getClientOriginalName('ch_banner');
+        $request->ch_banner->move($cuahang->ch_id,$nameFileBanner);
+
+        $cuahang->update([
+            'ch_ten'=>$request->ch_ten,
+            'ch_diachi'=>$request->ch_diachi,
+            'ch_thongtin'=>$request->ch_thongtin,
+            'ch_banner'=>$request->hasFile('ch_banner') ? $cuahang->ch_id.'/'.$nameFileBanner : $cuahang->ch_banner,
+            'ch_anhdaidien'=>$request->hasFile('ch_anhdaidien') ? $cuahang->ch_id.'/'.$nameFileAvatar : $cuahang->ch_banner,
+            'ch_trangthai'=>$request->ch_trangthai
+  ]);
+
+        return back();
+    }
 }

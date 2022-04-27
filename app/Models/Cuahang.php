@@ -38,9 +38,6 @@ class Cuahang extends Model
 	protected $table = 'cuahang';
 	protected $primaryKey = 'ch_id';
 	public $timestamps = false;
-	protected $casts = [
-		'ch_trangthai' => 'int'
-	];
 
 	protected $fillable = [
 		'ch_ten',

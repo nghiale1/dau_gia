@@ -56,4 +56,16 @@ class PostController extends Controller
 
         return redirect()->route('post.index');
     }
+
+    public function list()
+    {
+        $data=Baiviet::paginate(9);
+
+        return view("client.post.list",compact("data"));
+    }
+
+    public function detail(Baiviet $baiviet)
+    {
+        return view("client.post.detail",compact("baiviet"));
+    }
 }

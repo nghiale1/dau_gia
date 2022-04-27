@@ -138,7 +138,6 @@ class ProductController extends Controller
         ->get();
 
         $auditHistory = DB::table('daugia')->where('sp_id',$id)->get();
-
         return view('store.product.detail', compact('detail','image','auditCurrent','auditHistory','auditInfo'));
     }
 

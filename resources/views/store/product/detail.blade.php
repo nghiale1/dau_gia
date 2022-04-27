@@ -122,10 +122,11 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <?php $stt = 1; ?>
                             @foreach ($auditInfo as $item)
                                 <tr>
-                                    <td></td>
-                                    <td>{{ $item->nd_ten }}</td>
+                                    <td>{{ $stt++ }}</td>
+                                    <td>{{ $item->nd_hoten }}</td>
                                     <td>{{ $item->ctdg_thoigian }}</td>
                                 </tr>
                             @endforeach
@@ -133,7 +134,27 @@
                     </table>
                 </div>
                 <div class="tab-pane fade" id="product-rating" role="tabpanel" aria-labelledby="product-rating-tab">
+                    <table class="table table-light">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>#</th>
+                                <th>Khách hàng</th>
+                                <th>Thời gian</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php $stt = 1; ?>
+                            @foreach ($auditInfo as $item)
+                                <tr>
+                                    <td>{{ $stt++ }}</td>
+                                    <td>{{ $item->nd_hoten }}</td>
+                                    <td>{{ $item->ctdg_thoigian }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                     @foreach ($auditHistory as $item)
+
                         <p>{{ $item->dg_thoigianbatdau }}</p>
                     @endforeach
                 </div>

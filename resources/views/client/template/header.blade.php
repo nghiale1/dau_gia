@@ -13,9 +13,9 @@
                     <div class="col-md-7 col-lg-8 col-sm-5 col-xs-3">
                         <nav class="main__menu__nav hidden-xs hidden-sm">
                             <ul class="main__menu">
-                                <li class="drop"><a href="#">Trang chủ</a></li>
+                                <li class="drop"><a href="{{route("client.index")}}">Trang chủ</a></li>
                                 <li class="drop"><a href="#">Cuộc đấu giá</a></li>
-                                <li class="drop"><a href="#">Tin tức</a></li>
+                                <li class="drop"><a href="{{route("post.list")}}">Tin tức</a></li>
                                 <li class="drop"><a href="#">Giới thiệu</a></li>
                                 <li class="drop"><a href="#">Liên hệ & Góp ý</a></li>
                             </ul>

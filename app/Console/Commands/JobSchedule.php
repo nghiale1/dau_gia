@@ -50,29 +50,28 @@ class JobSchedule extends Command
 
     protected function process()
     {
-        while(true) {
-            // Your Database Logic
             $now = Carbon::now();
-            $date = $now->subDays(4);
+            $date = Carbon::now()->subDays(4);
             $daugia = DB::table('daugia')->whereDate('dg_thoigianbatdau', '<=',$now)->whereDate('dg_thoigianketthuc', '>=',$now)->where('dg_trangthai',1)->get();
 
             foreach ($daugia as $key => $value) {
                 $chitietdaugia=DB::table('chitietdaugia')->join('daugia','daugia.dg_id','chitietdaugia.dg_id')->where('chitietdaugia.dg_id',$value->dg_id)->orderBy('ctdg_giatien', 'desc')->first();
-                DB::table('giohang')->insert([
-                    'gh_soluong'=>1,
-                    'gh_dongia'=>$chitietdaugia->ctdg_giatien,
-                    'nd_id'=>$chitietdaugia->nd_id,
-                    'gh_ngaythem'=>$now,
-                    'sp_id' => $chitietdaugia->sp_id
-                ]);
+                if($chitietdaugia){
+                    DB::table('giohang')->insert([
+                        'gh_soluong'=>1,
+                        'gh_dongia'=>$chitietdaugia->ctdg_giatien,
+                        'nd_id'=>$chitietdaugia->nd_id,
+                        'gh_ngaythem'=>$now,
+                        'sp_id' => $chitietdaugia->sp_id
+                    ]);
 
-                DB::table('daugia')->where('dg_id',$value->dg_id)->update([
-                    'dg_trangthai'=>3
-                ]);
+                    DB::table('daugia')->where('dg_id',$value->dg_id)->update([
+                        'dg_trangthai'=>3
+                    ]);
 
-                DB::table('test')->insert(['content'=>"123"]);
+                    DB::table('test')->insert(['content'=>$value->dg_id]);
+                }
+
             }
-            sleep(4);
-        }
     }
 }

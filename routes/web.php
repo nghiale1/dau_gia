@@ -13,7 +13,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\Store\StatController;
 use App\Http\Controllers\UserController;
-
+use Carbon\Carbon;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,7 +24,31 @@ use App\Http\Controllers\UserController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/test', function () {
+    $now = Carbon::now();
+            //$date = $now->subDays(4);
+            $daugia = DB::table('daugia')->whereDate('dg_thoigianbatdau', '<=',$now)->whereDate('dg_thoigianketthuc', '>=',$now)->where('dg_trangthai',1)->get();
 
+            foreach ($daugia as $key => $value) {
+                $chitietdaugia=DB::table('chitietdaugia')->join('daugia','daugia.dg_id','chitietdaugia.dg_id')->where('chitietdaugia.dg_id',$value->dg_id)->orderBy('ctdg_giatien', 'desc')->first();
+               dd($chitietdaugia);
+                DB::table('giohang')->insert([
+                    'gh_soluong'=>1,
+                    'gh_dongia'=>$chitietdaugia->ctdg_giatien,
+                    'nd_id'=>$chitietdaugia->nd_id,
+                    'gh_ngaythem'=>$now,
+                    'sp_id' => $chitietdaugia->sp_id
+                ]);
+
+                DB::table('daugia')->where('dg_id',$value->dg_id)->update([
+                    'dg_trangthai'=>3
+                ]);
+
+                DB::table('test')->insert(['content'=>$value->dg_id]);
+            }
+            dd($daugia);
+
+});
 /* Test pusher */
 
 Route::get('/pusher-view', function () {

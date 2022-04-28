@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Cuahang
- * 
+ *
  * @property int $ch_id
  * @property string $ch_ten
  * @property string $ch_diachi
@@ -22,7 +22,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $ch_trangthai
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * 
+ *
  * @property Collection|Baocao[] $baocaos
  * @property Collection|Danhmuc[] $danhmucs
  * @property Collection|Daugium[] $daugia
@@ -40,6 +40,7 @@ class Cuahang extends Model
 	public $timestamps = false;
 
 	protected $fillable = [
+        'ch_id',
 		'ch_ten',
 		'ch_diachi',
 		'ch_thongtin',

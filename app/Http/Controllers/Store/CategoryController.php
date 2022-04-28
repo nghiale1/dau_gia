@@ -16,7 +16,7 @@ class CategoryController extends Controller
     public function index()
     {
         $store = $this->getStore();
-        $data = Danhmuc::where('ch_id', $store->nd_id)->where('dm_trangthai',1)->get();
+        $data = Danhmuc::where('ch_id', $store->ch_id)->where('dm_trangthai',1)->get();
         return view('store.category.index', compact('data'));
     }
 

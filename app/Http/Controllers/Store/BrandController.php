@@ -10,7 +10,7 @@ class BrandController extends Controller
 {
     public function index() {
         $store = $this->getStore();
-        $data = Thuonghieu::where('ch_id', $store->nd_id)->where('th_trangthai',1)->get();
+        $data = Thuonghieu::where('ch_id', $store->ch_id)->where('th_trangthai',1)->get();
         return view('store.brand.index', compact('data'));
     }
 

@@ -37,9 +37,9 @@ class ProductController extends Controller
     public function add()
     {
         $store = $this->getStore();
-        $type = Loaisanpham::where('lsp_id', $store->nd_id)->where('lsp_trangthai',1)->get();
-        $cat = Danhmuc::where('ch_id', $store->nd_id)->where('dm_trangthai',1)->get();
-        $brand = Thuonghieu::where('ch_id', $store->nd_id)->where('th_trangthai',1)->get();
+        $type = Loaisanpham::where('lsp_id', $store->ch_id)->where('lsp_trangthai',1)->get();
+        $cat = Danhmuc::where('ch_id', $store->ch_id)->where('dm_trangthai',1)->get();
+        $brand = Thuonghieu::where('ch_id', $store->ch_id)->where('th_trangthai',1)->get();
 
         return view('store.product.add', compact('type','cat','brand','store'));
     }

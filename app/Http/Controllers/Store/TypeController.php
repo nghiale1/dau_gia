@@ -16,7 +16,7 @@ class TypeController extends Controller
     public function index()
     {
         $store = $this->getStore();
-        $data = Loaisanpham::where('lsp_id', $store->nd_id)->where('lsp_trangthai',1)->get();
+        $data = Loaisanpham::where('ch_id', $store->ch_id)->where('lsp_trangthai',1)->get();
         return view('store.type.index', compact('data'));
     }
 

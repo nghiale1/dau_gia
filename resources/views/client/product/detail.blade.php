@@ -198,6 +198,7 @@
 <!-- End Blog Area -->
 <!-- End Banner Area -->
 @push('audit-pusher')
+{{-- <script src="https://js.pusher.com/3.1/pusher.min.js"></script> --}}
 <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
 <script>
     var mainTable = $('#auditDetail');
@@ -208,12 +209,11 @@
         encrypted: true,
         cluster: "ap1"
     });
-
     // Subscribe to the channel we specified in our Laravel Event
     var channel = pusher.subscribe('audit');
-
-
-    // Bind a function to a Event (the full Laravel class)
+    console.log(channel);
+        // Bind a function to a Event (the full Laravel class)
+    // var channel = window.Echo.channel('my-channel');
     channel.bind('audit-action', function(data) {
         console.log(data);
         var newRecord = `

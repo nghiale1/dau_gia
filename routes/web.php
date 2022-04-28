@@ -13,6 +13,8 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\Store\StatController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Store\AuditController;
+
 use Carbon\Carbon;
 /*
 |--------------------------------------------------------------------------
@@ -69,10 +71,7 @@ Route::get('/pusher', function (Illuminate\Http\Request $request) {
 Route::prefix('/')->name('client.')->group(function () {
     Route::get('/', [ClientController::class, 'index'])->name('index');
     Route::get('/{id}/san-pham', [ClientController::class, 'auditDetail'])->name('product.detail');
-    Route::get('/dau-gia', function (Illuminate\Http\Request $request) {
-        event(new App\Events\AuditPusherEvent($request));
-        return redirect()->back();
-    })->name('product.audit');
+    Route::get('/dau-gia', [AuditController::class, 'auditProgress'])->name('product.audit');
     Route::get('{id}/cua-hang',[ClientController::class,'storeInfo'])->name('product.by.store');
 });
 

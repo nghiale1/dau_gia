@@ -73,13 +73,13 @@
         encrypted: true,
         cluster: "ap1"
     });
-
+    console.log(pusher);
     // Subscribe to the channel we specified in our Laravel Event
     var channel = pusher.subscribe('audit');
 
-
+    console.log(channel);
     // Bind a function to a Event (the full Laravel class)
-    channel.bind('audit-action', function(data) {
+    channel.bind('audit-action', function(data) {//
         console.log(data);
         var existingNotifications = notifications.html();
         var avatar = Math.floor(Math.random() * (71 - 20 + 1)) + 20;
@@ -111,17 +111,17 @@
 
     });
 
-// // Enable pusher logging - don't include this in production
-// Pusher.logToConsole = true;
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
 
-// var pusher = new Pusher('93855d1d3bab4b932281', {
-//   cluster: 'ap1'
-// });
+    var pusher = new Pusher('93855d1d3bab4b932281', {
+    cluster: 'ap1'
+    });
 
-// var channel = pusher.subscribe('development');
-// channel.bind('my-event', function(data) {
-//   alert(JSON.stringify(data));
-// });
+    var channel = pusher.subscribe('development');
+        channel.bind('development', function(data) {
+        alert(JSON.stringify(data));
+    });
 </script>
 </body>
 </html>

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Store;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use Toastr;
 class AuditController extends Controller
 {
     /**
@@ -81,5 +81,17 @@ class AuditController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function auditProgress(Request $request) {
+        event(new App\Events\AuditPusherEvent($request));
+        toastr()->success('Tạo thương hiệu thành công');
+
+        $audit = DB::table('daugia')->where('dg_id', $request->auditId)->first();
+
+
+        $this->auditId = $request->auditId;
+        $this->auditPrice = number_format($request->auditPrice);
+        return redirect()->back();
     }
 }

@@ -32,7 +32,7 @@ class AuditPusherEvent implements ShouldBroadcast
 
     public function __construct(Request $request)
     {
-        // $this->message = $request->contents;
+        $this->message = $request->contents;
         $this->auditTime = Carbon::now()->toDateTimeString();
         $this->auditPrice = number_format($request->auditPrice);
         $this->auditId = $request->auditId;

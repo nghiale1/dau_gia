@@ -89,7 +89,7 @@ class AuditController extends Controller
 
 
         $audit = DB::table('daugia')->where('dg_id', $request->auditId)->first();
-        $detail = DB::table('chitietdaugia')->where('dg_id', $request->auditId)->first();
+        $detail = DB::table('chitietdaugia')->where('dg_id', $request->auditId)->orderBy('ctdg_giatien', 'desc')->first();
         $buocNhay = 0;
         if ($detail != null) {
             # code...
@@ -99,13 +99,19 @@ class AuditController extends Controller
             # code...
             toastr()->error('Giá tiền phải lớn hơn bước nhảy');
         }
-
-        if ($request->auditPrice < $detail->ctdg_giatien) {
+        if ($detail != null || $detail != '') {
             # code...
-            toastr()->error('Giá đấu nhỏ hơn giá cao nhất hiện tại');
+            if ($request->auditPrice < $detail->ctdg_giatien) {
+                # code...
+                toastr()->error('Giá đấu nhỏ hơn giá cao nhất hiện tại');
+            }
+            else {
+                event(new AuditPusherEvent($request));
+                toastr()->success('Đấu giá thành công');
+            }
         }else {
             event(new AuditPusherEvent($request));
-            toastr()->error('Đấu giá thành công');
+            toastr()->success('Đấu giá thành công');
         }
         return redirect()->back();
     }

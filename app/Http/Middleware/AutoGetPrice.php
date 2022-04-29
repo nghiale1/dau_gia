@@ -35,8 +35,6 @@ class AutoGetPrice
                 DB::table('daugia')->where('dg_id',$value->dg_id)->update([
                     'dg_trangthai'=>3
                 ]);
-
-                DB::table('test')->insert(['content'=>$value->dg_id]);
             }
 
         }

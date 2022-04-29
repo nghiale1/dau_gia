@@ -28,14 +28,24 @@ class BrandController extends Controller
             'th_ten' => $request->th_ten,
             'ch_id' => $store->ch_id
         ];
-        try {
-            //code...
-            $insert = Thuonghieu::insert($data);
-            $alert = $this->success("Tạo thương hiệu thành công");
-        } catch (\Exception $ex) {
-            //throw $th;
-            $alert = $this->error($ex);
+
+        $checkValid = Thuonghieu::where('th_ten',$request->th_ten)->where('ch_id', $store->ch_id)->first();
+
+        if($checkValid != null || $checkValid != "") {
+            $alert = $this->error("Thương hiệu đã tồn tại");
+            return redirect()->back();
+        }else {
+            try {
+                //code...
+                $insert = Thuonghieu::insert($data);
+                $alert = $this->success("Tạo thương hiệu thành công");
+            } catch (\Exception $ex) {
+                //throw $th;
+                $alert = $this->error($ex);
+            }
         }
+
+
         return redirect()->back()->with("msg",$alert);
     }
 

@@ -44,14 +44,24 @@ class TypeController extends Controller
             'lsp_ten' => $request->lsp_ten,
             'ch_id' => $store->ch_id
         ];
-        try {
-            //code...
-            $insert = Loaisanpham::insert($data);
-            $alert = $this->success("Tạo loại sản phẩm thành công");
-        } catch (\Exception $ex) {
-            //throw $th;
-            $alert = $this->error($ex);
+
+        $checkValid = Loaisanpham::where('lsp_ten',$request->lsp_ten)->where('ch_id', $store->ch_id)->first();
+
+        if($checkValid != null || $checkValid != "") {
+            $alert = $this->error("Loại sản phẩm đã tồn tại");
+            return redirect()->back();
+        }else{
+            try {
+                //code...
+                $insert = Loaisanpham::insert($data);
+                $alert = $this->success("Tạo loại sản phẩm thành công");
+            } catch (\Exception $ex) {
+                //throw $th;
+                $alert = $this->error($ex);
+            }
         }
+
+
         return redirect()->back()->with("msg",$alert);
     }
 

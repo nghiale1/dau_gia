@@ -45,14 +45,22 @@ class CategoryController extends Controller
             'dm_mota' => $request->dm_mota,
             'ch_id' => $store->ch_id
         ];
-        try {
-            //code...
-            $insert = Danhmuc::insert($data);
-            $alert = $this->success("Tạo danh mục thành công");
-        } catch (\Exception $ex) {
-            //throw $th;
-            $alert = $this->error($ex);
+        $checkValid = Danhmuc::where('dm_ten',$request->dm_ten)->where('ch_id', $store->ch_id)->first();
+
+        if($checkValid != null || $checkValid != "") {
+            $alert = $this->error("Danh mục đã tồn tại");
+            return redirect()->back();
+        }else{
+            try {
+                //code...
+                $insert = Danhmuc::insert($data);
+                $alert = $this->success("Tạo danh mục thành công");
+            } catch (\Exception $ex) {
+                //throw $th;
+                $alert = $this->error($ex);
+            }
         }
+
         return redirect()->back()->with("msg",$alert);
     }
 

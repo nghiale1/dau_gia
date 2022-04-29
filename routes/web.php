@@ -28,28 +28,8 @@ use Carbon\Carbon;
 */
 Route::get('/test', function () {
     $now = Carbon::now();
-            //$date = $now->subDays(4);
-            $daugia = DB::table('daugia')->whereDate('dg_thoigianbatdau', '<=',$now)->whereDate('dg_thoigianketthuc', '>=',$now)->where('dg_trangthai',1)->get();
-
-            foreach ($daugia as $key => $value) {
-                $chitietdaugia=DB::table('chitietdaugia')->join('daugia','daugia.dg_id','chitietdaugia.dg_id')->where('chitietdaugia.dg_id',$value->dg_id)->orderBy('ctdg_giatien', 'desc')->first();
-               dd($chitietdaugia);
-                DB::table('giohang')->insert([
-                    'gh_soluong'=>1,
-                    'gh_dongia'=>$chitietdaugia->ctdg_giatien,
-                    'nd_id'=>$chitietdaugia->nd_id,
-                    'gh_ngaythem'=>$now,
-                    'sp_id' => $chitietdaugia->sp_id
-                ]);
-
-                DB::table('daugia')->where('dg_id',$value->dg_id)->update([
-                    'dg_trangthai'=>3
-                ]);
-
-                DB::table('test')->insert(['content'=>$value->dg_id]);
-            }
-            dd($daugia);
-
+    $daugia = DB::table('daugia')->whereDate('dg_thoigianketthuc', '<=',$now)->where('dg_trangthai',1)->get();
+    dd($daugia);
 });
 /* Test pusher */
 
@@ -67,111 +47,116 @@ Route::get('/pusher', function (Illuminate\Http\Request $request) {
 })->name('event.pusher');
 
 /* End test pusher */
-// Route::view('/admin', 'admin/template/layout');
-Route::prefix('/')->name('client.')->group(function () {
-    Route::get('/', [ClientController::class, 'index'])->name('index');
-    Route::get('/{id}/san-pham', [ClientController::class, 'auditDetail'])->name('product.detail');
-    Route::get('/dau-gia', [AuditController::class, 'auditProgress'])->name('product.audit');
-    Route::get('{id}/cua-hang',[ClientController::class,'storeInfo'])->name('product.by.store');
-});
 
-Route::prefix('/bai-viet')->name("post.")->group(function () {
-    Route::get('/danh-sach', [PostController::class, 'list'])->name('list');
-    Route::get('/chi-tiet/{baiviet}', [PostController::class, 'detail'])->name('detail');
+Route::middleware(['autoGetPrice'])->group(function () {
+    // Route::view('/admin', 'admin/template/layout');
+    Route::prefix('/')->name('client.')->group(function () {
+        Route::get('/', [ClientController::class, 'index'])->name('index');
+        Route::get('/{id}/san-pham', [ClientController::class, 'auditDetail'])->name('product.detail');
+        Route::get('/dau-gia', [AuditController::class, 'auditProgress'])->name('product.audit');
+        Route::get('{id}/cua-hang',[ClientController::class,'storeInfo'])->name('product.by.store');
+    });
 
-});
+    Route::prefix('/bai-viet')->name("post.")->group(function () {
+        Route::get('/danh-sach', [PostController::class, 'list'])->name('list');
+        Route::get('/chi-tiet/{baiviet}', [PostController::class, 'detail'])->name('detail');
 
-
-Route::view('/quan-tri', 'admin/template/layout');
-
-Route::get('/dang-ky', [AuthController::class, 'registerView'])->name('register.view');
-Route::post('/xu-ly-dang-ky', [AuthController::class, 'registerHandle'])->name('register.handle');
-Route::get('/xac-thuc/{id}',[AuthController::class,'authVerify'])->name('register.auth.verify');
-Route::get('/dang-nhap', [AuthController::class, 'loginView'])->name('login.view');
-Route::get('/dang-xuat', [AuthController::class, 'logout'])->name('logout');
-Route::get('/xu-ly-dang-nhap', [AuthController::class, 'loginHandle'])->name('login.handle');
-
-Route::group(['middleware' => 'checkUser'], function () {
-    Route::get('/danh-sach-tat-ca-cua-hang', [StoreController::class, 'listStore'])->name('listStore');
-    Route::get('/chi-tiet/{cuahang}', [StoreController::class, 'detailStore'])->name('admin.detailStore');
-    Route::post('/cap-nhat/{cuahang}', [StoreController::class, 'updateStore'])->name('admin.updateStore');
-
-Route::prefix('/nguoi-dung')->group(function () {
-    Route::get('/danh-sach-tat-ca-nguoi-dung', [UserController::class, 'listUser'])->name('listUser');
-    Route::post('/cap-nhat/{nguoidung}', [UserController::class, 'updateUser'])->name('updateUser');
-
-});
-Route::prefix('/bai-viet')->name('post.')->group(function () {
-    Route::get('/', [PostController::class, 'index'])->name('index');
-    Route::get('/them', [PostController::class, 'create'])->name('create');
-    Route::post('/luu', [PostController::class, 'store'])->name('store');
-    Route::get('/sua/{baiviet}', [PostController::class, 'edit'])->name('edit');
-    Route::post('/cap-nhat/{baiviet}', [PostController::class, 'update'])->name('update');
-    Route::post('/xoa/{baiviet}', [PostController::class, 'delete'])->name('delete');
-});
-    Route::group(['middleware' => 'checkSession'], function () {
-
-        Route::get('/thong-tin-ca-nhan', [AuthController::class, 'info'])->name('user.info');
-        Route::post('/dang-ky-cua-hang', [StoreController::class, 'handleRegisterStore'])->name('store.register');
-
-        Route::prefix('/cua-hang')->group(function () {
-            Route::get('/', [StoreController::class, 'storeDetail'])->name('store.detail');
-            Route::get('/thong-tin', [StoreController::class, 'info'])->name('store.info');
-            Route::post('/cap-nhat/{cuahang}', [StoreController::class, 'update'])->name('store.update');
-        });
-
-        Route::prefix('/don-hang')->name('order.')->group(function () {
-            Route::get('/danh-sach-don-hang',  [OrderController::class, 'getList'])->name('getList');
-            Route::post('/cap-nhat--don-hang/{donhang}',  [OrderController::class, 'update'])->name('update');
-        });
+    });
 
 
-        Route::get('/danh-sach-cua-hang', [AdminController::class, 'shoplist'])->name('admin.shoplist');
+    Route::view('/quan-tri', 'admin/template/layout');
 
-        Route::prefix('/thuong-hieu')->name('brand.')->group(function () {
-            Route::get('/', [BrandController::class, 'index'])->name('index');
-            Route::get('/them-moi', [BrandController::class, 'add'])->name('add');
-            Route::post('/xu-ly-them-moi', [BrandController::class, 'store'])->name('store');
-            Route::get('/chinh-sua/{id}', [BrandController::class, 'edit'])->name('edit');
-            Route::post('/xu-ly-chinh-sua/{id}', [BrandController::class, 'update'])->name('update');
-            Route::get('/xoa/{id}', [BrandController::class, 'delete'])->name('delete');
-        });
+    Route::get('/dang-ky', [AuthController::class, 'registerView'])->name('register.view');
+    Route::post('/xu-ly-dang-ky', [AuthController::class, 'registerHandle'])->name('register.handle');
+    Route::get('/xac-thuc/{id}',[AuthController::class,'authVerify'])->name('register.auth.verify');
+    Route::get('/dang-nhap', [AuthController::class, 'loginView'])->name('login.view');
+    Route::get('/dang-xuat', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/xu-ly-dang-nhap', [AuthController::class, 'loginHandle'])->name('login.handle');
 
-        Route::prefix('/danh-muc')->name('category.')->group(function () {
-            Route::get('/', [CategoryController::class, 'index'])->name('index');
-            Route::get('/them-moi', [CategoryController::class, 'add'])->name('add');
-            Route::post('/xu-ly-them-moi', [CategoryController::class, 'store'])->name('store');
-            Route::get('/chinh-sua/{id}', [CategoryController::class, 'edit'])->name('edit');
-            Route::post('/xu-ly-chinh-sua/{id}', [CategoryController::class, 'update'])->name('update');
-            Route::get('/xoa/{id}', [CategoryController::class, 'delete'])->name('delete');
-        });
+    Route::group(['middleware' => 'checkUser'], function () {
+        Route::get('/danh-sach-tat-ca-cua-hang', [StoreController::class, 'listStore'])->name('listStore');
+        Route::get('/chi-tiet/{cuahang}', [StoreController::class, 'detailStore'])->name('admin.detailStore');
+        Route::post('/cap-nhat/{cuahang}', [StoreController::class, 'updateStore'])->name('admin.updateStore');
 
-        Route::prefix('/loai-san-pham')->name('type.')->group(function () {
-            Route::get('/', [TypeController::class, 'index'])->name('index');
-            Route::get('/them-moi', [TypeController::class, 'add'])->name('add');
-            Route::post('/xu-ly-them-moi', [TypeController::class, 'store'])->name('store');
-            Route::get('/chinh-sua/{id}', [TypeController::class, 'edit'])->name('edit');
-            Route::post('/xu-ly-chinh-sua/{id}', [TypeController::class, 'update'])->name('update');
-            Route::get('/xoa/{id}', [TypeController::class, 'delete'])->name('delete');
-        });
+    Route::prefix('/nguoi-dung')->group(function () {
+        Route::get('/danh-sach-tat-ca-nguoi-dung', [UserController::class, 'listUser'])->name('listUser');
+        Route::post('/cap-nhat/{nguoidung}', [UserController::class, 'updateUser'])->name('updateUser');
+
+    });
+    Route::prefix('/bai-viet')->name('post.')->group(function () {
+        Route::get('/', [PostController::class, 'index'])->name('index');
+        Route::get('/them', [PostController::class, 'create'])->name('create');
+        Route::post('/luu', [PostController::class, 'store'])->name('store');
+        Route::get('/sua/{baiviet}', [PostController::class, 'edit'])->name('edit');
+        Route::post('/cap-nhat/{baiviet}', [PostController::class, 'update'])->name('update');
+        Route::post('/xoa/{baiviet}', [PostController::class, 'delete'])->name('delete');
+    });
+        Route::group(['middleware' => 'checkSession'], function () {
+
+            Route::get('/thong-tin-ca-nhan', [AuthController::class, 'info'])->name('user.info');
+            Route::post('/dang-ky-cua-hang', [StoreController::class, 'handleRegisterStore'])->name('store.register');
+
+            Route::prefix('/cua-hang')->group(function () {
+                Route::get('/', [StoreController::class, 'storeDetail'])->name('store.detail');
+                Route::get('/thong-tin', [StoreController::class, 'info'])->name('store.info');
+                Route::post('/cap-nhat/{cuahang}', [StoreController::class, 'update'])->name('store.update');
+            });
+
+            Route::prefix('/don-hang')->name('order.')->group(function () {
+                Route::get('/danh-sach-don-hang',  [OrderController::class, 'getList'])->name('getList');
+                Route::post('/cap-nhat--don-hang/{donhang}',  [OrderController::class, 'update'])->name('update');
+            });
 
 
-        Route::prefix('/san-pham')->name('product.')->group(function () {
-            Route::get('/', [ProductController::class, 'index'])->name('index');
-            Route::get('/them-moi', [ProductController::class, 'add'])->name('add');
-            Route::post('/xu-ly-them-moi', [ProductController::class, 'store'])->name('store');
-            Route::get('/chi-tiet/{id}', [ProductController::class, 'show'])->name('show');
-            Route::post('/them-dau-gia/{id}', [ProductController::class, 'setupAudit'])->name('setup.audit');
-            // Route::post('/xu-ly-chinh-sua/{id}',[ProductController::class, 'update'])->name('update');
-            // Route::get('/xoa/{id}',[ProductController::class, 'delete'])->name('delete');
-        });
+            Route::get('/danh-sach-cua-hang', [AdminController::class, 'shoplist'])->name('admin.shoplist');
 
-        Route::prefix('/thong-ke')->name('stat.')->group(function () {
-            Route::get('/thong-ke-doanh-thu', [StatController::class, 'revenue'])->name('revenue');
-            Route::get('/thong-ke-don-hang', [StatController::class, 'order'])->name('order');
-            Route::get('/thong-ke-san-pham', [StatController::class, 'product'])->name('product');
-            Route::get('/thong-ke-nguoi-dung', [StatController::class, 'user'])->name('user');
-            Route::get('/thong-ke-cua-hang', [StatController::class, 'store'])->name('store');
+            Route::prefix('/thuong-hieu')->name('brand.')->group(function () {
+                Route::get('/', [BrandController::class, 'index'])->name('index');
+                Route::get('/them-moi', [BrandController::class, 'add'])->name('add');
+                Route::post('/xu-ly-them-moi', [BrandController::class, 'store'])->name('store');
+                Route::get('/chinh-sua/{id}', [BrandController::class, 'edit'])->name('edit');
+                Route::post('/xu-ly-chinh-sua/{id}', [BrandController::class, 'update'])->name('update');
+                Route::get('/xoa/{id}', [BrandController::class, 'delete'])->name('delete');
+            });
+
+            Route::prefix('/danh-muc')->name('category.')->group(function () {
+                Route::get('/', [CategoryController::class, 'index'])->name('index');
+                Route::get('/them-moi', [CategoryController::class, 'add'])->name('add');
+                Route::post('/xu-ly-them-moi', [CategoryController::class, 'store'])->name('store');
+                Route::get('/chinh-sua/{id}', [CategoryController::class, 'edit'])->name('edit');
+                Route::post('/xu-ly-chinh-sua/{id}', [CategoryController::class, 'update'])->name('update');
+                Route::get('/xoa/{id}', [CategoryController::class, 'delete'])->name('delete');
+            });
+
+            Route::prefix('/loai-san-pham')->name('type.')->group(function () {
+                Route::get('/', [TypeController::class, 'index'])->name('index');
+                Route::get('/them-moi', [TypeController::class, 'add'])->name('add');
+                Route::post('/xu-ly-them-moi', [TypeController::class, 'store'])->name('store');
+                Route::get('/chinh-sua/{id}', [TypeController::class, 'edit'])->name('edit');
+                Route::post('/xu-ly-chinh-sua/{id}', [TypeController::class, 'update'])->name('update');
+                Route::get('/xoa/{id}', [TypeController::class, 'delete'])->name('delete');
+            });
+
+
+            Route::prefix('/san-pham')->name('product.')->group(function () {
+                Route::get('/', [ProductController::class, 'index'])->name('index');
+                Route::get('/them-moi', [ProductController::class, 'add'])->name('add');
+                Route::post('/xu-ly-them-moi', [ProductController::class, 'store'])->name('store');
+                Route::get('/chi-tiet/{id}', [ProductController::class, 'show'])->name('show');
+                Route::post('/them-dau-gia/{id}', [ProductController::class, 'setupAudit'])->name('setup.audit');
+                // Route::post('/xu-ly-chinh-sua/{id}',[ProductController::class, 'update'])->name('update');
+                // Route::get('/xoa/{id}',[ProductController::class, 'delete'])->name('delete');
+            });
+
+            Route::prefix('/thong-ke')->name('stat.')->group(function () {
+                Route::get('/thong-ke-doanh-thu', [StatController::class, 'revenue'])->name('revenue');
+                Route::get('/thong-ke-don-hang', [StatController::class, 'order'])->name('order');
+                Route::get('/thong-ke-san-pham', [StatController::class, 'product'])->name('product');
+                Route::get('/thong-ke-nguoi-dung', [StatController::class, 'user'])->name('user');
+                Route::get('/thong-ke-cua-hang', [StatController::class, 'store'])->name('store');
+            });
         });
     });
 });
+
+

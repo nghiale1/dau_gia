@@ -157,27 +157,22 @@
                                                 <div class="shp__single__product">
                                                     <div class="shp__pro__thumb">
                                                         <a href="#">
-                                                            <img src="http://127.0.0.1:8000/client/images/product-2/sm-smg/1.jpg" alt="product images">
+                                                            <img src="{{ asset($item->hasp_duongdan) }}" alt="product images">
                                                         </a>
                                                     </div>
                                                     <div class="shp__pro__details">
                                                         <h2><a href="product-details.html">{{ $item->sp_ten }}</a></h2>
-                                                        <span class="shp__price">{{ $item->gh_dongia }}</span>
-                                                    </div>
-                                                    <div class="remove__btn">
-                                                        <a href="#" title="Remove this item"><i class="zmdi zmdi-close"></i></a>
+                                                        <span class="shp__price">{{ number_format($item->gh_dongia) }} VND</span>
+                                                        <a href="#" title="Remove this item" class="btn btn-primary">
+                                                            Thanh toán
+                                                        </a>
                                                     </div>
                                                 </div>
                                                 @endforeach
+                                                <div class="shp__single__product">
+                                                    <p style="color:red;">Vui lòng thanh toán giỏ hàng trước 4 ngày kể từ ngày đấu giá thành công !</p>
+                                                </div>
                                             </div>
-                                            {{-- <ul class="shoping__total">
-                                                <li class="subtotal">Subtotal:</li>
-                                                <li class="total__price">$130.00</li>
-                                            </ul>
-                                            <ul class="shopping__btn">
-                                                <li><a href="cart.html">View Cart</a></li>
-                                                <li class="shp__checkout"><a href="checkout.html">Checkout</a></li>
-                                            </ul> --}}
                                         </div>
                                     </div>
                                     <div class="accordion__title">

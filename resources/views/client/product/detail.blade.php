@@ -63,20 +63,24 @@
                         </ul>
 
                         <div class="ht__pro__desc">
+                            @if ( Auth::guard('nguoidung')->id() == $detail->nd_id)
+                            <div class="sin__desc">
+                                <p>Chủ cửa hàng kinh doanh sản phẩm này không được phép tham gia đấu giá. </p>
+                            </div>
 
-                            @if ( Auth::guard('nguoidung')->check())
-                                <div class="sin__desc align--left">
-                                    <form action="{{ route('client.product.audit') }}" method="GET">
-                                        <div class="single-input">
-                                            <input type="number" name="auditPrice">
-                                            <button>Đấu giá</button>
-                                        </div>
-                                        <input type="text" name="auditId" value="{{ $detail->dg_id }}" hidden>
-                                        <input type="text" name="userId" value="{{ Auth::guard('nguoidung')->id() }}" hidden>
-                                    </form>
-                                </div>
-                            {{-- @elseif (Auth::guard('nguoidung')->id())) --}}
+                            @elseif (Auth::guard('nguoidung')->check())
+                            <div class="sin__desc align--left">
+                                <form action="{{ route('client.product.audit') }}" method="GET">
+                                    <div class="single-input">
+                                        <input type="number" name="auditPrice">
+                                        <button>Đấu giá</button>
+                                    </div>
+                                    <input type="text" name="auditId" value="{{ $detail->dg_id }}" hidden>
+                                    <input type="text" name="userId" value="{{ Auth::guard('nguoidung')->id() }}" hidden>
+                                </form>
+                            </div>
                             @else
+
                             <div class="sin__desc">
                                 <p>Vui lòng đăng nhập để tham gia đấu giá. <a href="{{ route('login.view') }}">Tại đây</a></p>
                             </div>

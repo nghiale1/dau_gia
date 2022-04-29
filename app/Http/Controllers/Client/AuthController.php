@@ -36,6 +36,28 @@ class AuthController extends Controller
             toastr()->error('Mật khẩu không trùng khớp');
             return redirect()->back();
         }
+
+        $checkEmail = Nguoidung::where('nd_email',$request->nd_email)->first();
+
+        if($checkEmail != null || $checkEmail != "") {
+            toastr()->error('Email đã được sử dụng');
+            return redirect()->back();
+        }
+
+        $checkUsername = Nguoidung::where('username',$request->username)->first();
+
+        if($checkUsername != null || $checkUsername != "") {
+            toastr()->error('Tên đăng nhập đã được sử dụng');
+            return redirect()->back();
+        }
+
+        $checkPhone = Nguoidung::where('nd_sdt',$request->nd_sdt)->first();
+
+        if($checkPhone != null || $checkPhone != "") {
+            toastr()->error('Số điện thoại đã được sử dụng');
+            return redirect()->back();
+        }
+
         $userInsert = Nguoidung::insertGetId($data);
 
         //send mail for authenticate

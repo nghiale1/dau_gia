@@ -47,7 +47,12 @@
                         @if (property_exists($detail,'dg_thoigianketthuc') == true)
                         <ul  class="pro__prize">
                             <li class="old__prize">Thời gian còn lại: </li>
+                            @if ($detail->dg_thoigianketthuc < Carbon\Carbon::now())
+                                <span style="color: red">Hết thời gian đấu giá</span>
+                            @else
                             <li data-countdown="{{ $detail->dg_thoigianketthuc}}"></li>
+                            @endif
+                            {{-- <li data-countdown="{{ $detail->dg_thoigianketthuc}}"></li> --}}
                         </ul>
                         <ul  class="pro__prize">
                             <li class="old__prize">Giá khởi điểm: </li>

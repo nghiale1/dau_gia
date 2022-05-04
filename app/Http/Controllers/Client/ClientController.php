@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\Sanpham;
 use Illuminate\Http\Request;
 use DB;
 use DateTime;
@@ -18,6 +19,9 @@ class ClientController extends Controller
         ->where('daugia.dg_thoigianketthuc','>=',new DateTime($timeNow))
         ->where('hinhanhsanpham.hasp_anhdaidien',1)
         ->get();
+        foreach ($product as $key => $value) {
+            $value->isAuction=true;
+        }
         return view('client.index', compact('product'));
     }
 
@@ -60,5 +64,26 @@ class ClientController extends Controller
         $category = DB::table('danhmuc')->where('ch_id',$id)->get();
         $productType = DB::table('loaisanpham')->where('ch_id',$id)->get();
         return view('client.product.store', compact('product','storeInfo','category','productType'));
+    }
+
+    public function search(Request $request)
+    {
+        $condition = "%".$request->name."%";
+        $timeNow = Carbon::now();
+        $product = DB::table('daugia')
+        ->join('sanpham','sanpham.sp_id','daugia.sp_id')
+        ->join('hinhanhsanpham','hinhanhsanpham.sp_id','sanpham.sp_id')
+        ->where('sp_ten','LIKE',$condition)
+        ->where('hinhanhsanpham.hasp_anhdaidien',1)
+        ->get();
+
+        foreach ($product as $key => $value) {
+            if($value->dg_thoigianbatdau <= Date('Y-m-d H:i:s') && $value->dg_thoigianketthuc >= Date('Y-m-d H:i:s')){
+                $value->isAuction=true;
+            }else{
+                $value->isAuction=false;
+            }
+        }
+        return view('client.index', compact('product'));
     }
 }

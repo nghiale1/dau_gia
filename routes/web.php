@@ -73,6 +73,7 @@ Route::prefix('/')->name('client.')->group(function () {
     Route::get('/{id}/san-pham', [ClientController::class, 'auditDetail'])->name('product.detail');
     Route::get('/dau-gia', [AuditController::class, 'auditProgress'])->name('product.audit');
     Route::get('{id}/cua-hang',[ClientController::class,'storeInfo'])->name('product.by.store');
+    Route::get('/tim-kiem', [ClientController::class, 'search'])->name('search');
 });
 
 Route::prefix('/bai-viet')->name("post.")->group(function () {

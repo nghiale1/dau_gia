@@ -19,8 +19,8 @@
                     <div class="row" >
                         <div class="col-md-12" >
                             <div class="search__inner">
-                                <form action="#" method="get">
-                                    <input placeholder="Nhập tên sản phẩm cần tìm... " type="text">
+                                <form action="{{route('client.search')}}" method="get">
+                                    <input placeholder="Nhập tên sản phẩm cần tìm... " type="text" name="name">
                                     <button type="submit"></button>
                                 </form>
                                 <div class="search__close__btn">

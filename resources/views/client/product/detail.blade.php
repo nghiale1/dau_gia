@@ -44,48 +44,41 @@
                         @php
                             property_exists($detail,'dg_thoigianketthuc');
                         @endphp
-                        @if (property_exists($detail,'dg_thoigianketthuc') == true)
-                        <ul  class="pro__prize">
-                            <li class="old__prize">Thời gian còn lại: </li>
-                            <li data-countdown="{{ $detail->dg_thoigianketthuc}}"></li>
-<<<<<<< Updated upstream
-=======
-                            @endif
->>>>>>> Stashed changes
-                        </ul>
-                        <ul  class="pro__prize">
-                            <li class="old__prize">Giá khởi điểm: </li>
-                            <li>{{ number_format($detail->dg_giakhoidiem) }} VNĐ</li>
-                        </ul>
-                        <ul  class="pro__prize">
-                            <li class="old__prize">Bước nhảy: </li>
-                            <li>{{ number_format($detail->dg_buocnhay) }} VNĐ</li>
-                        </ul>
-                        <ul  class="pro__prize">
-                            <li class="old__prize">Giá cao nhất: </li>
-                            <li id="maxPrice">{{ $maxPrice != null ? number_format($maxPrice->ctdg_giatien) : 0 }} VNĐ</li>
-                        </ul>
+                            @if (property_exists($detail,'dg_thoigianketthuc') == true)
+                                <ul  class="pro__prize">
+                                    <li class="old__prize">Thời gian còn lại: </li>
+                                    <li data-countdown="{{ $detail->dg_thoigianketthuc}}"></li>
+                                </ul>
+                                <ul  class="pro__prize">
+                                    <li class="old__prize">Giá khởi điểm: </li>
+                                    <li>{{ number_format($detail->dg_giakhoidiem) }} VNĐ</li>
+                                </ul>
+                                <ul  class="pro__prize">
+                                    <li class="old__prize">Bước nhảy: </li>
+                                    <li>{{ number_format($detail->dg_buocnhay) }} VNĐ</li>
+                                </ul>
+                                <ul  class="pro__prize">
+                                    <li class="old__prize">Giá cao nhất: </li>
+                                    <li id="maxPrice">{{ $maxPrice != null ? number_format($maxPrice->ctdg_giatien) : 0 }} VNĐ</li>
+                                </ul>
 
-                        <div class="ht__pro__desc">
-
-                            @elseif (Auth::guard('nguoidung')->check())
-                            <div class="sin__desc align--left">
+                                <div class="ht__pro__desc">
+                                <div class="sin__desc align--left">
                                 @if ($detail->dg_thoigianketthuc > Carbon\Carbon::now())
-                                <form action="{{ route('client.product.audit') }}" method="GET">
-                                    <div class="single-input">
-                                        <input type="number" name="auditPrice">
-                                        <button>Đấu giá</button>
+                                        <form action="{{ route('client.product.audit') }}" method="GET">
+                                            <div class="single-input">
+                                                <input type="number" name="auditPrice">
+                                                <button>Đấu giá</button>
+                                            </div>
+                                            <input type="text" name="auditId" value="{{ $detail->dg_id }}" hidden>
+                                            <input type="text" name="userId" value="{{ Auth::guard('nguoidung')->id() }}" hidden>
+                                        </form>
                                     </div>
-                                    <input type="text" name="auditId" value="{{ $detail->dg_id }}" hidden>
-                                    <input type="text" name="userId" value="{{ Auth::guard('nguoidung')->id() }}" hidden>
-                                </form>
+                                @else
+                                    <div class="sin__desc">
+                                        <p>Vui lòng đăng nhập để tham gia đấu giá. <a href="{{ route('login.view') }}">Tại đây</a></p>
+                                    </div>
                                 @endif
-                            </div>
-                            @else
-                            <div class="sin__desc">
-                                <p>Vui lòng đăng nhập để tham gia đấu giá. <a href="{{ route('login.view') }}">Tại đây</a></p>
-                            </div>
-                            @endif
                         </div>
                         @else
                         <p style="color: red;">Sản phẩm chưa đăng ký đấu giá</p>
@@ -119,7 +112,6 @@
                                         <input type="text" name="userId" value="{{ Auth::guard('nguoidung')->id() }}" hidden>
                                     </form>
                                 </div>
-                            {{-- @elseif (Auth::guard('nguoidung')->id())) --}}
                             @else
                             <div class="sin__desc">
                                 <p>Vui lòng đăng nhập để tham gia đấu giá. <a href="{{ route('login.view') }}">Tại đây</a></p>

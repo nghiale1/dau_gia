@@ -19,11 +19,13 @@
                     <div class="bl__dtl">
                         <p>{{$baiviet->bv_noidung}}</p>
                     </div>
-                    
+                    <h3>Bình luận bằng Facebook</h3>
+                    <p>Sử dụng tài khoản facebook để bình luận về sản phẩm</p>
+                    <div class="fb-comments" data-href="{{ asset('') }}{{ Request::path() }}" data-numposts="5" data-width=""></div>
                 </div>
-            </div>  
-            <div class="col-xs-3"></div> 
-            
+            </div>
+            <div class="col-xs-3"></div>
+
         </div>
     </div>
 </section>

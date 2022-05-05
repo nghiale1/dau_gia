@@ -1,3 +1,5 @@
+    <!-- jQuery -->
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v6.0&appId=1927813493974310&autoLogAppEvents=1"></script>
     <!-- jquery latest version -->
     <script src={{asset("client/js/vendor/jquery-3.2.1.min.js")}}></script>
     <!-- Bootstrap framework js -->

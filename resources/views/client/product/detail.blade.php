@@ -48,6 +48,10 @@
                         <ul  class="pro__prize">
                             <li class="old__prize">Thời gian còn lại: </li>
                             <li data-countdown="{{ $detail->dg_thoigianketthuc}}"></li>
+<<<<<<< Updated upstream
+=======
+                            @endif
+>>>>>>> Stashed changes
                         </ul>
                         <ul  class="pro__prize">
                             <li class="old__prize">Giá khởi điểm: </li>
@@ -64,18 +68,19 @@
 
                         <div class="ht__pro__desc">
 
-                            @if ( Auth::guard('nguoidung')->check())
-                                <div class="sin__desc align--left">
-                                    <form action="{{ route('client.product.audit') }}" method="GET">
-                                        <div class="single-input">
-                                            <input type="number" name="auditPrice">
-                                            <button>Đấu giá</button>
-                                        </div>
-                                        <input type="text" name="auditId" value="{{ $detail->dg_id }}" hidden>
-                                        <input type="text" name="userId" value="{{ Auth::guard('nguoidung')->id() }}" hidden>
-                                    </form>
-                                </div>
-                            {{-- @elseif (Auth::guard('nguoidung')->id())) --}}
+                            @elseif (Auth::guard('nguoidung')->check())
+                            <div class="sin__desc align--left">
+                                @if ($detail->dg_thoigianketthuc > Carbon\Carbon::now())
+                                <form action="{{ route('client.product.audit') }}" method="GET">
+                                    <div class="single-input">
+                                        <input type="number" name="auditPrice">
+                                        <button>Đấu giá</button>
+                                    </div>
+                                    <input type="text" name="auditId" value="{{ $detail->dg_id }}" hidden>
+                                    <input type="text" name="userId" value="{{ Auth::guard('nguoidung')->id() }}" hidden>
+                                </form>
+                                @endif
+                            </div>
                             @else
                             <div class="sin__desc">
                                 <p>Vui lòng đăng nhập để tham gia đấu giá. <a href="{{ route('login.view') }}">Tại đây</a></p>

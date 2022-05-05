@@ -103,12 +103,16 @@
                                                 <textarea name="ch_thongtin" id="" cols="30" rows="10" class="form-control">{{$store->ch_thongtin}}</textarea>
                                               </div>
                                               <div class="form-group">
-                                                <label for="my-input">Banner</label>
-                                                <input id="my-input" class="form-control" type="file" name="ch_banner">
+                                                <label for="my-input">Ảnh đại diện</label>
+                                                <img src="{{ asset($store->ch_anhdaidien) }}" alt="" class="img">
+                                                <img src="{{ asset($store->ch_anhdaidien) }}" alt="" class="img" id="output-avatar">
+                                                <input id="my-input" class="form-control" type="file" accept="image/*" name="ch_anhdaidien" id="ch_anhdaidien" onchange="document.getElementById('output-avatar').src = window.URL.createObjectURL(this.files[0])">
                                               </div>
                                               <div class="form-group">
-                                                <label for="my-input">Ảnh đại diện</label>
-                                                <input id="my-input" class="form-control" type="file" name="ch_anhdaidien">
+                                                <label for="my-input">Banner</label>
+                                                <img src="{{ asset($store->ch_banner) }}" alt="" class="img">
+                                                <img src="{{ asset($store->ch_banner) }}" alt="" class="img" id="output-banner">
+                                                <input id="my-input" class="form-control" type="file" accept="image/*" name="ch_banner" id="ch_banner"  onchange="document.getElementById('output-banner').src = window.URL.createObjectURL(this.files[0])">
                                               </div>
                                               <div class="form-group">
                                                 <label for="my-input">Trạng thái</label>

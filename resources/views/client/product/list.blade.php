@@ -66,7 +66,7 @@
                                         <div class="category">
                                             <div class="ht__cat__thumb">
                                                 <a href="{{ route('client.product.detail', ['id'=>$item->dg_id]) }}">
-                                                    <img src="{{asset($item->hasp_duongdan)}}" alt="product images">
+                                                    <img src="{{asset($item->hasp_duongdan)}}" width="290" height="385" alt="product images">
                                                 </a>
                                             </div>
                                             <div class="fr__hover__info">

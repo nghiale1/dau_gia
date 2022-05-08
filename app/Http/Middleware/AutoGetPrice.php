@@ -4,7 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-
+use Carbon\Carbon;
+use DB;
+use DateTime;
 class AutoGetPrice
 {
     /**
@@ -17,9 +19,9 @@ class AutoGetPrice
     public function handle(Request $request, Closure $next)
     {
         $now = Carbon::now();
-        $date = Carbon::now()->subDays(4);
-        $daugia = DB::table('daugia')->whereDate('dg_thoigianketthuc', '<=',$now)->where('dg_trangthai',1)->get();
-
+        $daugia = DB::table('daugia')
+        ->where('daugia.dg_thoigianketthuc','<=',new DateTime($now))
+        ->where('dg_trangthai',1)->get();
         foreach ($daugia as $key => $value) {
             $chitietdaugia=DB::table('chitietdaugia')->join('daugia','daugia.dg_id','chitietdaugia.dg_id')->where('chitietdaugia.dg_id',$value->dg_id)->orderBy('ctdg_giatien', 'desc')->first();
             if($chitietdaugia){
@@ -34,11 +36,16 @@ class AutoGetPrice
                 DB::table('daugia')->where('dg_id',$value->dg_id)->update([
                     'dg_trangthai'=>3
                 ]);
-
-                DB::table('test')->insert(['content'=>$value->dg_id]);
             }
-
         }
+        // $cart = DB::table('giohang')->get();
+        // foreach ($cart as $key => $value) {
+        //     # code...
+        //     $cartCreatedDate = Carbon::create($value->gh_ngaythem)->subDays(3);
+        //     if($cartCreatedDate < $date) {
+        //         DB::table('giohang')->where('gh_id', $value->gh_id)->delete();
+        //     }
+        // }
         return $next($request);
     }
 }

@@ -83,69 +83,20 @@
                                         Thông tin đơn hàng mua
                                     </div>
                                     <div class="accordion__body">
-                                        <div class="bilinfo">
-                                            <form action="#">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="single-input mt-0">
-                                                            <select name="bil-country" id="bil-country">
-                                                                <option value="select">Select your country</option>
-                                                                <option value="arb">Arab Emirates</option>
-                                                                <option value="ban">Bangladesh</option>
-                                                                <option value="ind">India</option>
-                                                                <option value="uk">United Kingdom</option>
-                                                                <option value="usa">United States</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="single-input">
-                                                            <input type="text" placeholder="First name">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="single-input">
-                                                            <input type="text" placeholder="Last name">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <div class="single-input">
-                                                            <input type="text" placeholder="Company name">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <div class="single-input">
-                                                            <input type="text" placeholder="Street Address">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <div class="single-input">
-                                                            <input type="text" placeholder="Apartment/Block/House (optional)">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="single-input">
-                                                            <input type="text" placeholder="City/State">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="single-input">
-                                                            <input type="text" placeholder="Post code/ zip">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="single-input">
-                                                            <input type="email" placeholder="Email address">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="single-input">
-                                                            <input type="text" placeholder="Phone number">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </form>
+                                        @foreach ($bill as $item)
+                                        <div class="shp__single__product">
+                                            <div class="shp__pro__thumb">
+                                                <a href="#">
+                                                    <img src="http://127.0.0.1:8000/client/images/product-2/sm-smg/1.jpg" alt="product images">
+                                                </a>
+                                            </div>
+                                            <div class="shp__pro__details">
+                                                <h2><a href="product-details.html">{{ $item->sp_ten }}</a></h2>
+                                                <span class="shp__price">{{ $item->dh_dongia }}</span>
+                                                <a href="{{ route('payment.index', ['idCart'=>$item->gh_id]) }}" title="Remove this item" class="btn btn-success">Thanh toán</i></a>
+                                            </div>
                                         </div>
+                                        @endforeach
                                     </div>
                                     <div class="accordion__title">
                                         Giỏ hàng
@@ -163,24 +114,19 @@
                                                     <div class="shp__pro__details">
                                                         <h2><a href="product-details.html">{{ $item->sp_ten }}</a></h2>
                                                         <span class="shp__price">{{ $item->gh_dongia }}</span>
+                                                        <a href="{{ route('payment.index', ['idCart'=>$item->gh_id]) }}" title="Remove this item" class="btn btn-success">Thanh toán</i></a>
+
                                                     </div>
-                                                    <div class="remove__btn">
-                                                        <a href="#" title="Remove this item"><i class="zmdi zmdi-close"></i></a>
-                                                    </div>
+                                                    {{-- <div class="remove__btn">
+                                                        <a href="#" title="Remove this item">Thanh toán</i></a>
+                                                    </div> --}}
                                                 </div>
                                                 @endforeach
+                                                <p style="color: orange;">Sản phẩm sẽ tự xóa khỏi giỏ hàng sau 3 ngày, vui lòng ấn thanh toán</p>
                                             </div>
-                                            {{-- <ul class="shoping__total">
-                                                <li class="subtotal">Subtotal:</li>
-                                                <li class="total__price">$130.00</li>
-                                            </ul>
-                                            <ul class="shopping__btn">
-                                                <li><a href="cart.html">View Cart</a></li>
-                                                <li class="shp__checkout"><a href="checkout.html">Checkout</a></li>
-                                            </ul> --}}
                                         </div>
                                     </div>
-                                    <div class="accordion__title">
+                                    {{-- <div class="accordion__title">
                                         Sản phẩm đã đấu giá
                                     </div>
                                     <div class="accordion__body">
@@ -258,7 +204,7 @@
                                                 </form>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>

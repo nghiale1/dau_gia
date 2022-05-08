@@ -35,6 +35,12 @@
 <script src="{{asset("admin/js/adminlte.js")}}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 {{-- <script src="{{asset("admin/js/pages/dashboard.js")}}"></script> --}}
+<script>
+    $(function () {
+      // Summernote
+      $('.textarea').summernote()
+    })
+  </script>
 @toastr_js
 
 @stack('datatable')

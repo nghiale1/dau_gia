@@ -96,7 +96,7 @@
                 </div>
                 <div class="mt-4">
                     <button class="btn btn-primary btn-lg btn-flat" @if ($auditCurrent > 0) disabled @endif type="button" data-toggle="modal" data-target="#setup-audit">Thiết lập đấu giá</button>
-                    <button class="btn btn-default btn-lg btn-flat" type="button">Ẩn sản phẩm</button>
+                    <a class="btn btn-default btn-lg btn-flat" href="{{ route('product.edit', ['id'=>$detail->sp_id]) }}">Chỉnh sửa</a>
                 </div>
               </div>
             </div>
@@ -109,7 +109,7 @@
                 </div>
               </nav>
               <div class="tab-content p-3" id="nav-tabContent">
-                <div class="tab-pane fade show active" id="product-desc" role="tabpanel" aria-labelledby="product-desc-tab">{{ $detail->sp_mota }}</div>
+                <div class="tab-pane fade show active" id="product-desc" role="tabpanel" aria-labelledby="product-desc-tab">{!! $detail->sp_mota !!}</div>
                 <div class="tab-pane fade" id="product-comments" role="tabpanel" aria-labelledby="product-comments-tab">
                     <p>Thời gian bắt đầu: </p>
                     <p>Thời gian kết thúc</p>
@@ -140,23 +140,36 @@
                                 <th>#</th>
                                 <th>Khách hàng</th>
                                 <th>Thời gian</th>
+                                <th>Giá đấu thành công</th>
+                                <th>Trạng thái</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php $stt = 1; ?>
-                            @foreach ($auditInfo as $item)
+                            @foreach ($auditHistory as $item)
+                                <?php $detailAudit = DB::table('chitietdaugia')->where('dg_id', $item->dg_id)
+                                ->join('nguoidung','nguoidung.nd_id','chitietdaugia.nd_id')->orderBy('ctdg_id','desc')->first();
+                                // dd($detail);
+                                ?>
                                 <tr>
                                     <td>{{ $stt++ }}</td>
-                                    <td>{{ $item->nd_hoten }}</td>
-                                    <td>{{ $item->ctdg_thoigian }}</td>
+                                    <td>{{ $detailAudit->nd_hoten }}</td>
+                                    <td>{{ $detailAudit->ctdg_thoigian }}</td>
+                                    <td>{{ number_format($detailAudit->ctdg_giatien)  }}VNĐ</td>
+                                    <td>
+                                        @if ($item->dg_trangthai == 1)
+                                            Đang diễn ra
+                                        @else
+                                            Đã kết thúc
+                                        @endif
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
-                    @foreach ($auditHistory as $item)
-
+                    {{-- @foreach ($auditHistory as $item)
                         <p>{{ $item->dg_thoigianbatdau }}</p>
-                    @endforeach
+                    @endforeach --}}
                 </div>
               </div>
             </div>
@@ -164,7 +177,6 @@
           <!-- /.card-body -->
         </div>
         <!-- /.card -->
-
       </section>
       <!-- /.content -->
     </div>

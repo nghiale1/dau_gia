@@ -85,7 +85,8 @@ class AuthController extends Controller
         $userId = Auth::guard('nguoidung')->user()->nd_id;
         $storeInfo = Cuahang::where('nd_id', $userId)->first();
         $cart = DB::table('giohang')->join('sanpham','sanpham.sp_id','giohang.sp_id')->where('nd_id', $userId)->get();
-        return view('client.auth.info', compact('storeInfo','cart'));
+        $bill = DB::table('donhang')->join('chitietdonhang','chitietdonhang.dh_id','donhang.dh_id')->join('sanpham','sanpham.sp_id','chitietdonhang.sp_id')->where('nd_id', $userId)->get();
+        return view('client.auth.info', compact('storeInfo','cart','bill'));
     }
 
     public function logout()

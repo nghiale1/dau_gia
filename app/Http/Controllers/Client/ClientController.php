@@ -17,12 +17,23 @@ class ClientController extends Controller
         ->join('hinhanhsanpham','hinhanhsanpham.sp_id','sanpham.sp_id')
         ->where('daugia.dg_thoigianbatdau','<=',new DateTime($timeNow))
         ->where('daugia.dg_thoigianketthuc','>=',new DateTime($timeNow))
+        ->where('daugia.dg_trangthai',1)
         ->where('hinhanhsanpham.hasp_anhdaidien',1)
         ->get();
         foreach ($product as $key => $value) {
             $value->isAuction=true;
         }
-        return view('client.index', compact('product'));
+        $post = DB::table('baiviet')->paginate(3);
+        return view('client.index', compact('product', 'post'));
+    }
+
+    public function listProduct() {
+        $product = DB::table('daugia')
+        ->join('sanpham','sanpham.sp_id','daugia.sp_id')
+        ->join('hinhanhsanpham','hinhanhsanpham.sp_id','sanpham.sp_id')
+        ->where('hinhanhsanpham.hasp_anhdaidien',1)
+        ->get();
+
     }
 
     public function auditDetail($id) {
@@ -75,6 +86,7 @@ class ClientController extends Controller
         ->join('hinhanhsanpham','hinhanhsanpham.sp_id','sanpham.sp_id')
         ->where('sp_ten','LIKE',$condition)
         ->where('hinhanhsanpham.hasp_anhdaidien',1)
+        ->orderBy('dg_thoigianketthuc', 'desc')
         ->get();
 
         foreach ($product as $key => $value) {
@@ -84,6 +96,6 @@ class ClientController extends Controller
                 $value->isAuction=false;
             }
         }
-        return view('client.index', compact('product'));
+        return view('client.product.list', compact('product'));
     }
 }

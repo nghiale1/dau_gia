@@ -14,7 +14,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\Store\StatController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Store\AuditController;
-
+use App\Http\Controllers\Client\PaymentController;
 use Carbon\Carbon;
 /*
 |--------------------------------------------------------------------------
@@ -74,8 +74,13 @@ Route::middleware(['autoGetPrice'])->group(function () {
     Route::prefix('/nguoi-dung')->group(function () {
         Route::get('/danh-sach-tat-ca-nguoi-dung', [UserController::class, 'listUser'])->name('listUser');
         Route::post('/cap-nhat/{nguoidung}', [UserController::class, 'updateUser'])->name('updateUser');
-
     });
+
+    Route::prefix('/thanh-toan')->name('payment.')->group(function () {
+        Route::get('{idCart}/gio-hang/',[PaymentController::class, 'index'])->name('index');
+        Route::post('/{idCart}/thanh-toan',[PaymentController::class, 'payment'])->name('handle');
+    });
+
     Route::prefix('/bai-viet')->name('post.')->group(function () {
         Route::get('/', [PostController::class, 'index'])->name('index');
         Route::get('/them', [PostController::class, 'create'])->name('create');
@@ -137,7 +142,8 @@ Route::middleware(['autoGetPrice'])->group(function () {
                 Route::post('/xu-ly-them-moi', [ProductController::class, 'store'])->name('store');
                 Route::get('/chi-tiet/{id}', [ProductController::class, 'show'])->name('show');
                 Route::post('/them-dau-gia/{id}', [ProductController::class, 'setupAudit'])->name('setup.audit');
-                // Route::post('/xu-ly-chinh-sua/{id}',[ProductController::class, 'update'])->name('update');
+                Route::get('/sua-san-pham/{id}',[ProductController::class, 'edit'])->name('edit');
+                Route::post('/xu-ly-chinh-sua/{id}',[ProductController::class, 'update'])->name('update');
                 // Route::get('/xoa/{id}',[ProductController::class, 'delete'])->name('delete');
             });
 

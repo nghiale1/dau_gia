@@ -1,10 +1,33 @@
 @extends('client.template.layout')
 @section('content')
+<!-- Start Bradcaump area -->
+<div class="ht__bradcaump__area"
+style="background: rgba(0, 0, 0, 0) url(images/bg/4.jpg) no-repeat scroll center center / cover ;">
+<div class="ht__bradcaump__wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="bradcaump__inner">
+                    <nav class="bradcaump-inner">
+                        <a class="breadcrumb-item" href="index.html">Trang chủ</a>
+                        <span class="brd-separetor"><i class="zmdi zmdi-chevron-right"></i></span>
+                        <span class="breadcrumb-item active">Tin tức</span>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- End Bradcaump area -->
         <!-- Start Blog Area -->
         <section class="htc__blog__area bg__white ptb--100">
             <div class="container">
                 <div class="row">
                     <div class="ht__blog__wrap blog--page clearfix">
+                        @if ($data->count() == 0)
+                            <p>Chưa có bài viết</p>
+                        @else
                         @foreach ($data as $item)
                         <div class="col-md-6 col-lg-4 col-sm-12 col-xs-12">
                             <div class="blog">
@@ -26,6 +49,9 @@
                             </div>
                         </div>
                         @endforeach
+                        @endif
+
+
                     </div>
                 </div>
                 <!-- Start PAgenation -->

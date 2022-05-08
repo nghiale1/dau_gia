@@ -93,9 +93,11 @@
                         <!-- Start Single Footer Widget -->
                         <div class="col-md-3 col-sm-6 col-xs-12">
                             <div class="footer">
-                                <h2 class="title__line--2">ABOUT US</h2>
+                                <h2 class="title__line--2">GIỚI THIỆU</h2>
                                 <div class="ft__details">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim</p>
+                                    <p>
+                                        Cung cấp nền tản đấu giá trực tuyến cho bạn
+                                    </p>
                                     <div class="ft__social__link">
                                         <ul class="social__link">
                                             <li><a href="#"><i class="icon-social-twitter icons"></i></a></li>
@@ -116,14 +118,10 @@
                         <!-- Start Single Footer Widget -->
                         <div class="col-md-2 col-sm-6 col-xs-12 xmt-40">
                             <div class="footer">
-                                <h2 class="title__line--2">information</h2>
+                                <h2 class="title__line--2">Thông tin</h2>
                                 <div class="ft__inner">
                                     <ul class="ft__list">
-                                        <li><a href="#">About us</a></li>
-                                        <li><a href="#">Delivery Information</a></li>
-                                        <li><a href="#">Privacy & Policy</a></li>
-                                        <li><a href="#">Terms  & Condition</a></li>
-                                        <li><a href="#">Manufactures</a></li>
+                                        <li><a href="#">Về chúng tôi</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -132,14 +130,10 @@
                         <!-- Start Single Footer Widget -->
                         <div class="col-md-2 col-sm-6 col-xs-12 xmt-40 smt-40">
                             <div class="footer">
-                                <h2 class="title__line--2">my account</h2>
+                                <h2 class="title__line--2">Tài khoản của tôi</h2>
                                 <div class="ft__inner">
                                     <ul class="ft__list">
-                                        <li><a href="#">My Account</a></li>
-                                        <li><a href="cart.html">My Cart</a></li>
-                                        <li><a href="#">Login</a></li>
-                                        <li><a href="wishlist.html">Wishlist</a></li>
-                                        <li><a href="checkout.html">Checkout</a></li>
+                                        <li><a href="{{ route('user.info') }}">Thông tin cá nhân</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -148,7 +142,7 @@
                         <!-- Start Single Footer Widget -->
                         <div class="col-md-2 col-sm-6 col-xs-12 xmt-40 smt-40">
                             <div class="footer">
-                                <h2 class="title__line--2">Our service</h2>
+                                {{-- <h2 class="title__line--2">Our service</h2>
                                 <div class="ft__inner">
                                     <ul class="ft__list">
                                         <li><a href="#">My Account</a></li>
@@ -157,14 +151,14 @@
                                         <li><a href="wishlist.html">Wishlist</a></li>
                                         <li><a href="checkout.html">Checkout</a></li>
                                     </ul>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                         <!-- End Single Footer Widget -->
                         <!-- Start Single Footer Widget -->
                         <div class="col-md-3 col-sm-6 col-xs-12 xmt-40 smt-40">
                             <div class="footer">
-                                <h2 class="title__line--2">NEWSLETTER </h2>
+                                <h2 class="title__line--2">Tin tức </h2>
                                 <div class="ft__inner">
                                     <div class="news__input">
                                         <input type="text" placeholder="Your Mail*">
@@ -207,7 +201,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.countdown/2.2.0/jquery.countdown.min.js" integrity="sha512-lteuRD+aUENrZPTXWFRPTBcDDxIGWe5uu0apPEn+3ZKYDwDaEErIK9rvR0QzUGmUQ55KFE2RqGTVoZsKctGMVw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
     $('[data-countdown]').each(function() {
-        console.log("hi");
         var $this = $(this), finalDate = $(this).data('countdown');
         $this.countdown(finalDate, function(event) {
             $this.html(event.strftime('%H:%M:%S'));

@@ -76,7 +76,7 @@
                                     </div>
                                 @else
                                     <div class="sin__desc">
-                                        <p>Vui lòng đăng nhập để tham gia đấu giá. <a href="{{ route('login.view') }}">Tại đây</a></p>
+                                        <p style="color: red;">Hết thời gian đấu giá</p>
                                     </div>
                                 @endif
                         </div>

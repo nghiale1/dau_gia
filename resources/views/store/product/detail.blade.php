@@ -151,19 +151,21 @@
                                 ->join('nguoidung','nguoidung.nd_id','chitietdaugia.nd_id')->orderBy('ctdg_id','desc')->first();
                                 // dd($detail);
                                 ?>
+                                @if ($detailAudit != null)
                                 <tr>
-                                    <td>{{ $stt++ }}</td>
-                                    <td>{{ $detailAudit->nd_hoten }}</td>
-                                    <td>{{ $detailAudit->ctdg_thoigian }}</td>
-                                    <td>{{ number_format($detailAudit->ctdg_giatien)  }}VNĐ</td>
-                                    <td>
-                                        @if ($item->dg_trangthai == 1)
-                                            Đang diễn ra
-                                        @else
-                                            Đã kết thúc
-                                        @endif
-                                    </td>
-                                </tr>
+                                <td>{{ $stt++ }}</td>
+                                <td>{{ $detailAudit->nd_hoten }}</td>
+                                <td>{{ $detailAudit->ctdg_thoigian }}</td>
+                                <td>{{ number_format($detailAudit->ctdg_giatien)  }}VNĐ</td>
+                                <td>
+                                    @if ($item->dg_trangthai == 1)
+                                        Đang diễn ra
+                                    @else
+                                        Đã kết thúc
+                                    @endif
+                                </td>
+                            </tr>
+                            @endif
                             @endforeach
                         </tbody>
                     </table>

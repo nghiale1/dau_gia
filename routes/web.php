@@ -66,6 +66,15 @@ Route::middleware(['autoGetPrice'])->group(function () {
     Route::get('/dang-xuat', [AuthController::class, 'logout'])->name('logout');
     Route::get('/xu-ly-dang-nhap', [AuthController::class, 'loginHandle'])->name('login.handle');
 
+    //xu ly quen mat khau
+    Route::get('/quen-mat-khau', [AuthController::class, 'viewForgetPassword'])->name('forget.pass');
+    Route::post('/xu-ly-quen-mat-khau', [AuthController::class, 'forgetPassword'])->name('handle.forget.password');
+    Route::get('/xac-thuc-mat-khau/{id}', [AuthController::class, 'viewConfirmPassword'])->name('validate.password');
+    Route::post('/xac-nhan-mat-khau-thay-doi', [AuthController::class, 'handleConfirmPassword'])->name('handle.confirm.password');
+
+
+    Route::get('/chinh-sua-thong-tin', [AuthController::class, 'viewChangeInfo'])->name('view.change.info');
+    Route::post('/xu-ly-chinh-sua-thong-tin', [AuthController::class, 'changeInfo'])->name('handle.change.info');
     Route::group(['middleware' => 'checkUser'], function () {
         Route::get('/danh-sach-tat-ca-cua-hang', [StoreController::class, 'listStore'])->name('listStore');
         Route::get('/chi-tiet/{cuahang}', [StoreController::class, 'detailStore'])->name('admin.detailStore');

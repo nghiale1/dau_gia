@@ -11,6 +11,7 @@ use Auth;
 use Toastr;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\AuthNotify;
+use App\Mail\ForgetPassword;
 use DB;
 class AuthController extends Controller
 {
@@ -46,6 +47,36 @@ class AuthController extends Controller
         return redirect()->route('login.view');
     }
 
+    public function viewForgetPassword() {
+        return view('client.auth.forget-password');
+    }
+
+    public function forgetPassword(Request $request) {
+        $email = $request->nd_email;
+        $id = DB::table('nguoidung')->where('nd_email', $email)->first();
+        $link = url('/').'/xac-thuc-mat-khau/'.$id->nd_id;
+        Mail::to($email)->send(new ForgetPassword($link));
+        return redirect()->back();
+    }
+
+    public function viewConfirmPassword($id) {
+        $idUser = $id;
+        return view('client.auth.view-confirm-password', compact('idUser'));
+    }
+
+    public function handleConfirmPassword(Request $request) {
+        $userId = $request->nd_id;
+        if ($request->password != $request->re_password) {
+            toastr()->error('Mật khẩu không trùng khớp');
+            return redirect()->back();
+        }
+        $update = Nguoidung::find($userId)->update(
+            [
+                'password' => Hash::make($request->password)
+            ]
+        );
+        return view('client.auth.login');
+    }
 
     public function loginView()
     {
@@ -95,5 +126,24 @@ class AuthController extends Controller
         Auth::guard('quantrivien')->logout();
 
         return redirect()->route('client.index');
+    }
+
+    public function viewChangeInfo() {
+        return view('client.auth.change-info');
+    }
+
+    public function changeInfo(Request $request) {
+        $userId = Auth::guard('nguoidung')->user()->nd_id;
+        $data = [
+            'nd_hoten' => $request->nd_hoten,
+            'nd_email' => $request->nd_email,
+            'nd_sdt' => $request->nd_sdt,
+            'nd_namsinh' => $request->nd_namsinh,
+            'nd_diachi' => $request->nd_diachi,
+        ];
+        $update = Nguoidung::find($userId)->update(
+            $data
+        );
+        return redirect()->back();
     }
 }

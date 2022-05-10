@@ -34,7 +34,7 @@
                                     <button type="submit" class="fv-btn">Đăng nhập</button>
                                     <a href="{{ route('register.view') }}" class="fv-btn">Đăng ký</a>
                                 </div>
-
+                                <a href="{{ route('forget.pass') }}">Quên mật khẩu</a>
                             </div>
                         </div>
                     </form>

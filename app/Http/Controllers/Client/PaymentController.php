@@ -31,12 +31,13 @@ class PaymentController extends Controller
         );
         $removeCart = DB::table('giohang')->where('gh_id', $idCart)->delete();
         toastr()->success('Đơn hàng đang chờ xác nhận');
-        // $detail == DB::table('chitietdonhang')->insert(
-        //     [
-        //         'ctdh_dongia' => $cart->gh_dongia,
-        //         'sp_id' =>
-        //     ]
-        // );
+        $detail = DB::table('chitietdonhang')->insert(
+            [
+                'ctdh_dongia' => $cart->gh_dongia,
+                'sp_id' => $cart->sp_id,
+                'dh_id' => $insert
+            ]
+        );
 
         return redirect()->route('user.info');
     }

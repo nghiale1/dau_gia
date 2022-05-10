@@ -39,6 +39,7 @@
                                             <p><b>Số điện thoại:</b> {{ Auth::guard('nguoidung')->user()->nd_sdt }}</p>
                                             <p><b>Email:</b> {{ Auth::guard('nguoidung')->user()->nd_email }}</p>
                                             <p><b>Địa chỉ:</b> {{ Auth::guard('nguoidung')->user()->nd_diachi }}</p>
+                                            <p><a href="{{ route('view.change.info') }}">Đổi thông tin cá nhân</a></p>
                                             @if ($storeInfo != null)
                                                 @if ($storeInfo->ch_trangthai == 0)
                                                     <p style="color: red;">Gian hàng chưa được xác thực</p>
@@ -108,18 +109,15 @@
                                                 <div class="shp__single__product">
                                                     <div class="shp__pro__thumb">
                                                         <a href="#">
-                                                            <img src="http://127.0.0.1:8000/client/images/product-2/sm-smg/1.jpg" alt="product images">
+                                                            {{ $imageProductCart = DB::table('hinhanhsanpham')->where('sp_id', $item->sp_id)->where('hasp_anhdaidien', 1)->first(); }}
+                                                            <img src="{{ asset($imageProductCart->hasp_duongdan) }}" alt="product images">
                                                         </a>
                                                     </div>
                                                     <div class="shp__pro__details">
                                                         <h2><a href="product-details.html">{{ $item->sp_ten }}</a></h2>
                                                         <span class="shp__price">{{ $item->gh_dongia }}</span>
                                                         <a href="{{ route('payment.index', ['idCart'=>$item->gh_id]) }}" title="Remove this item" class="btn btn-success">Thanh toán</i></a>
-
                                                     </div>
-                                                    {{-- <div class="remove__btn">
-                                                        <a href="#" title="Remove this item">Thanh toán</i></a>
-                                                    </div> --}}
                                                 </div>
                                                 @endforeach
                                                 <p style="color: orange;">Sản phẩm sẽ tự xóa khỏi giỏ hàng sau 3 ngày, vui lòng ấn thanh toán</p>

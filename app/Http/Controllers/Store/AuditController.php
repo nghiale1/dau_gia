@@ -86,12 +86,27 @@ class AuditController extends Controller
     }
 
     public function auditProgress(Request $request) {
-        event(new AuditPusherEvent($request));
 
         $audit = DB::table('daugia')->where('dg_id', $request->auditId)->first();
-        toastr()->success('Đấu giá thành công');
-        $this->auditId = $request->auditId;
-        $this->auditPrice = number_format($request->auditPrice);
+        $detail = DB::table('chitietdaugia')->where('dg_id', $request->auditId)->orderBy('ctdg_giatien', 'desc')->first();
+        $buocNhay = 0;
+        if ($detail != null) {
+            # code...
+            $buocNhay = $request->auditPrice - $detail->ctdg_giatien;
+        }else {
+            event(new AuditPusherEvent($request));
+            toastr()->success('Đấu giá thành công');
+            return redirect()->back();
+        }
+
+        if ($buocNhay < $audit->dg_buocnhay) {
+            # code...
+            toastr()->error('Giá tiền phải lớn hơn bước nhảy');
+        }
+        else {
+            event(new AuditPusherEvent($request));
+            toastr()->success('Đấu giá thành công');
+        }
         return redirect()->back();
     }
 }

@@ -81,12 +81,27 @@ class ClientController extends Controller
     {
         $condition = "%".$request->name."%";
         $timeNow = Carbon::now();
+        $timeStart = $request->timeStart;
+        $timeEnd = $request->timeEnd;
+        $statusAudit = $request->status;
+
         $product = DB::table('daugia')
         ->join('sanpham','sanpham.sp_id','daugia.sp_id')
         ->join('hinhanhsanpham','hinhanhsanpham.sp_id','sanpham.sp_id')
         ->where('sp_ten','LIKE',$condition)
-        ->where('hinhanhsanpham.hasp_anhdaidien',1)
-        ->orderBy('dg_thoigianketthuc', 'desc')
+        ->where('hinhanhsanpham.hasp_anhdaidien',1);
+
+
+        if($timeStart != null && $timeEnd != null) {
+            $product = $product->where('daugia.dg_thoigianbatdau','>=',new DateTime($timeStart))
+            ->where('daugia.dg_thoigianketthuc','<=',new DateTime($timeEnd));
+        }
+
+        if($statusAudit != null) {
+            $product = $product->where('daugia.dg_trangthai', $statusAudit);
+        }
+
+        $product = $product->orderBy('dg_thoigianketthuc', 'desc')
         ->get();
 
         foreach ($product as $key => $value) {
@@ -97,5 +112,16 @@ class ClientController extends Controller
             }
         }
         return view('client.product.list', compact('product'));
+    }
+
+    public function report(Request $request) {
+        $data = [
+            'bc_noidung' => $request->bc_noidung,
+            'ch_id' => $request->ch_id,
+            'nd_id' => $request->nd_id
+        ];
+        DB::table('baocao')->insert($data);
+        toastr()->success('Góp ý đã được gửi đi');
+        return redirect()->back();
     }
 }

@@ -27,33 +27,27 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12  col-sm-12 col-xs-12">
                     <div class="htc__product__rightidebar">
-                        {{-- <div class="htc__grid__top">
+                        <div class="htc__grid__top">
                             <div class="htc__select__option">
                                 <select class="ht__select">
-                                    <option>Default softing</option>
-                                    <option>Sort by popularity</option>
-                                    <option>Sort by average rating</option>
-                                    <option>Sort by newness</option>
+                                    <option value="">Trạng thái</option>
+                                    <option value="1">Đang đấu giá</option>
+                                    <option value="3">Đã kết thúc</option>
                                 </select>
-                                <select class="ht__select">
-                                    <option>Show by</option>
-                                    <option>Sort by popularity</option>
-                                    <option>Sort by average rating</option>
-                                    <option>Sort by newness</option>
-                                </select>
+
                             </div>
                             <div class="ht__pro__qun">
-                                <span>Showing 1-12 of 1033 products</span>
+                                Thời gian bắt đầu
+                                <input type="date" name="" class="" id="">
+                                Thời gian kết thúc
+                                <input type="date" name="" class="" id="">
                             </div>
                             <!-- Start List And Grid View -->
                             <ul class="view__mode" role="tablist">
-                                <li role="presentation" class="grid-view active"><a href="#grid-view" role="tab"
-                                        data-toggle="tab"><i class="zmdi zmdi-grid"></i></a></li>
-                                <li role="presentation" class="list-view"><a href="#list-view" role="tab"
-                                        data-toggle="tab"><i class="zmdi zmdi-view-list"></i></a></li>
+                                <button type="submit" class="fv-btn">Lọc</button>
                             </ul>
                             <!-- End List And Grid View -->
-                        </div> --}}
+                        </div>
                         <!-- Start Product View -->
                         <div class="row">
                             <div class="shop__grid__view__wrap">
@@ -70,7 +64,6 @@
                                                 </a>
                                             </div>
                                             <div class="fr__hover__info">
-
                                             </div>
                                             <div class="fr__product__inner">
                                                 <h4><a href="{{ route('client.product.detail', ['id'=>$item->dg_id]) }}">{{ $item->sp_ten }}</a></h4>

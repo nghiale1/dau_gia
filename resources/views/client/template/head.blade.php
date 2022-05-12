@@ -26,7 +26,7 @@
     <link rel="stylesheet" href={{asset("client/css/responsive.css")}}>
     <!-- User style -->
     <link rel="stylesheet" href={{asset("client/css/custom.css")}}>
-
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     @toastr_css
     <!-- Modernizr JS -->
     <script src={{asset("client/js/vendor/modernizr-3.5.0.min.js")}}></script>

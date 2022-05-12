@@ -18,7 +18,7 @@ class ForgetPassword extends Mailable
      */
     public function __construct()
     {
-        //
+        $this->link = $link;
     }
 
     /**

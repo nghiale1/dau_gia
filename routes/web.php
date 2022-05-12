@@ -48,6 +48,13 @@ Route::middleware(['autoGetPrice'])->group(function () {
         Route::get('/dau-gia', [AuditController::class, 'auditProgress'])->name('product.audit');
         Route::get('{id}/cua-hang',[ClientController::class,'storeInfo'])->name('product.by.store');
         Route::get('/tim-kiem', [ClientController::class, 'search'])->name('search');
+
+        Route::get('/lien-he', function () {
+            $store = DB::table('cuahang')->where('ch_trangthai',1)->get();
+            return view('client.report.index', compact('store'));
+        })->name('report');
+
+        Route::post('/bao-cao', [ClientController::class, 'report'])->name('report.handle');
     });
 
     Route::prefix('/bai-viet')->name("post.")->group(function () {
@@ -55,6 +62,7 @@ Route::middleware(['autoGetPrice'])->group(function () {
         Route::get('/chi-tiet/{baiviet}', [PostController::class, 'detail'])->name('detail');
 
     });
+
 
 
     Route::view('/quan-tri', 'admin/template/layout');
@@ -116,7 +124,7 @@ Route::middleware(['autoGetPrice'])->group(function () {
 
 
             Route::get('/danh-sach-cua-hang', [AdminController::class, 'shoplist'])->name('admin.shoplist');
-
+            Route::get('/bao-cao', [AdminController::class, 'listReport'])->name('admin.report.list');
             Route::prefix('/thuong-hieu')->name('brand.')->group(function () {
                 Route::get('/', [BrandController::class, 'index'])->name('index');
                 Route::get('/them-moi', [BrandController::class, 'add'])->name('add');

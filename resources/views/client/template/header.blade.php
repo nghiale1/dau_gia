@@ -17,7 +17,7 @@
                                 <li class="drop"><a href="{{route('client.search')}}">Cuộc đấu giá</a></li>
                                 <li class="drop"><a href="{{route("post.list")}}">Tin tức</a></li>
                                 <li class="drop"><a href="#">Giới thiệu</a></li>
-                                <li class="drop"><a href="#">Liên hệ & Góp ý</a></li>
+                                <li class="drop"><a href="{{ route('client.report') }}">Liên hệ & Góp ý</a></li>
                             </ul>
                         </nav>
                     </div>

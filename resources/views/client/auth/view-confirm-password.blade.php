@@ -16,7 +16,7 @@
         <div class="htc__product__container">
             <div class="row bilinfo">
                 <div class="row">
-                    <form action="{{ route('/xac-nhan-mat-khau-thay-doi') }}" method="POST">
+                    <form action="{{ route('handle.confirm.password') }}" method="POST">
                         @csrf
                         <div class="col-md-12">
                             <div class="single-input">

@@ -114,7 +114,7 @@
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
-                    
+
                     <ul class="nav nav-treeview">
                         @if (\Auth::guard('nguoidung')->check() || (\Auth::guard('quantrivien')->check() && \Session::has('ch_id')))
                         <li class="nav-item">
@@ -172,6 +172,15 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.report.list') }}" class="nav-link
+                    ">
+                        <i class="nav-icon fas fa-chart-pie"></i>
+                        <p>
+                            Góp ý
+                        </p>
+                    </a>
+                </li>
                 @endif
                 <li class="nav-item">
                     <a href="{{ route('logout') }}" class="nav-link
@@ -182,7 +191,7 @@
                         </p>
                     </a>
                 </li>
-                
+
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

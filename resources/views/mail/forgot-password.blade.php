@@ -11,7 +11,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xl-6 col-lg-6 col-sm-12 m-auto">
-                <h3>Xin chào {{ $user }} </h3>
+                <h3>Bạn đã yêu cầu đổi mật khẩu </h3>
                 <p> Yêu cầu đổi lại mật khẩu đang được thực hiện! </p>
                 <p>Vui lòng ấn vào <a href="{{ $link }}">link</a> để tiến hành đổi mật khẩu tài khoản</p>
             </div>

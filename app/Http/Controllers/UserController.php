@@ -11,8 +11,8 @@ class UserController extends Controller
     {
         $data=Nguoidung::all();
         return view('listUser',compact('data'));
-    }   
-    
+    }
+
     public function updateUser(Request $request,Nguoidung $nguoidung)
     {
         $nguoidung->update($request->all());
